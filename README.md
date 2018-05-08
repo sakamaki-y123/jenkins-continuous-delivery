@@ -11,4 +11,7 @@
             - リポジトリ
                 - リポジトリURL: "https://github.com/sakamaki-y123/jenkins-continuous-delivery"
                 - Script Path: "pipeline/decrative-pipeline/pipeline_00_seed_pipeline.groovy"
-
+5. グローバルセキュリティの設定を開く
+   http://{YOUR_JENKINS_HOST}/configureSecurity/
+6. Enable script security for Job DSL scripts のチェックを外す。
+   - "ERROR: script not yet approved for use" が出てしまうため。
