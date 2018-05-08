@@ -17,6 +17,10 @@ pipeline {
                     targets: 'jobdsl/pipeline/pipeline_01_hello_world.groovy',
                     additionalParameters: [FOLDER_PATH: "${FOLDER_PATH}"]
                 )
+                jobDsl (
+                    targets: 'jobdsl/pipeline/pipeline_02_use_sh_step.groovy',
+                    additionalParameters: [FOLDER_PATH: "${FOLDER_PATH}"]
+                )
             }
         }
     }
