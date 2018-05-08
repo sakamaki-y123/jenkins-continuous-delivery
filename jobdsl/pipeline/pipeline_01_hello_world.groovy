@@ -13,7 +13,7 @@ pipelineJob("decrative-pipeline/01_hello_world") {
 					branch("*/master")
 				}
 			}
-			scriptPath("decrative-pipeline/Jenkinsfile/01_hello_world.groovy")
+			scriptPath("decrative-pipeline/Jenkinsfile/pipeline_01_hello_world.groovy")
 		}
 	}
 	disabled(false)
