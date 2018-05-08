@@ -1,7 +1,7 @@
 folder("decrative-pipeline")
 
 pipelineJob("decrative-pipeline/01_hello_world") {
-	description()
+	description("01_hello_world job")
 	keepDependencies(false)
 	definition {
 		cpsScm {
