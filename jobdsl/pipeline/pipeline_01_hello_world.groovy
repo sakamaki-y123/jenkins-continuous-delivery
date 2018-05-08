@@ -1,19 +1,24 @@
-folder("decrative-pipeline")
+def folderPath = "${FOLDER_PATH}"
+def jobName = "${FOLDER_PATH}" + "/" + "01_hello_world"
+def jobDescription = "01_hello_world job"
 
-pipelineJob("decrative-pipeline/01_hello_world") {
-	description("01_hello_world job")
+def githubUrl = "sakamaki-y123/jenkins-continuous-delivery"
+def githubBranch = "*/master"
+
+pipelineJob(jobName) {
+	description(jobDescription)
 	keepDependencies(false)
 	definition {
 		cpsScm {
 			scm {
 				git {
 					remote {
-						github("sakamaki-y123/jenkins-continuous-delivery", "https")
+						github(githubUrl, "https")
 					}
-					branch("*/master")
+					branch(githubBranch)
 				}
 			}
-			scriptPath("decrative-pipeline/Jenkinsfile/pipeline_01_hello_world.groovy")
+			scriptPath("pipeline/decrative-pipeline/pipeline_01_hello_world.groovy")
 		}
 	}
 	disabled(false)
