@@ -1,1 +1,1 @@
-folder("decrative-pipeline")
+folder("${FOLDER_PATH}")
