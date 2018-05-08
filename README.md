@@ -10,5 +10,5 @@
         -  SCM: Git
             - リポジトリ
                 - リポジトリURL: "https://github.com/sakamaki-y123/jenkins-continuous-delivery"
-                - Script Path: "decrative-pipeline/Jenkinsfile/pipeline_00_seed_pipeline.groovy"
+                - Script Path: "pipeline/decrative-pipeline/pipeline_00_seed_pipeline.groovy"
 
