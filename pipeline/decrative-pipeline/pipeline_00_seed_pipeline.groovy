@@ -14,7 +14,8 @@ pipeline {
                         'jobdsl/folder/folder.groovy',
                         'jobdsl/pipeline/pipeline_01_hello_world.groovy',
                         'jobdsl/pipeline/pipeline_02_use_sh_step.groovy',
-                        'jobdsl/pipeline/pipeline_03_write_file.groovy'
+                        'jobdsl/pipeline/pipeline_03_write_file.groovy',
+                        'jobdsl/pipeline/pipeline_04_archive_artifacts'
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}"
