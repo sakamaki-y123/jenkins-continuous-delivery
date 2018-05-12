@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     stages {
-        stage('write file') {
+        stage('archive artifacts') {
 
             environment {
                 fileName = "output.txt"
