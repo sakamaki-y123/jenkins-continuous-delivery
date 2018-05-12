@@ -16,7 +16,8 @@ pipeline {
                         'jobdsl/pipeline/pipeline_02_use_sh_step.groovy',
                         'jobdsl/pipeline/pipeline_03_write_file.groovy',
                         'jobdsl/pipeline/pipeline_04_archive_artifacts.groovy',
-                        'jobdsl/pipeline/pipeline_05_clean_workspace.groovy'
+                        'jobdsl/pipeline/pipeline_05_clean_workspace.groovy',
+                        'jobdsl/pipeline/pipeline_06_copy_artifacts.groovy',
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
