@@ -1,6 +1,6 @@
 def folderPath = "${FOLDER_PATH}"
-def jobName = "${FOLDER_PATH}" + "/" + "07_get_current_date"
-def jobDescription = "07_get_current_date"
+def jobName = "${FOLDER_PATH}" + "/" + "07_read_json"
+def jobDescription = "07_read_json"
 
 pipelineJob(jobName) {
 	description(jobDescription)
@@ -16,7 +16,7 @@ pipelineJob(jobName) {
 					branch("${GIT_HUB_BRANCH}")
 				}
 			}
-			scriptPath("pipeline/decrative-pipeline/pipeline_07_get_current_date.groovy")
+			scriptPath("pipeline/decrative-pipeline/pipeline_07_read_json.groovy")
 		}
 	}
 	disabled(false)
