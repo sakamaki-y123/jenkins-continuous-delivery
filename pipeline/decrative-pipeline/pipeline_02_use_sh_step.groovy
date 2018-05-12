@@ -1,3 +1,10 @@
+/**
+* TOPICS OF THIS PIPELINE
+* - sh
+*     - https://jenkins.io/doc/pipeline/steps/workflow-durable-task-step/#sh-shell-script
+*/
+
+
 pipeline {
 
     agent any

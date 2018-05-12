@@ -1,3 +1,11 @@
+/**
+* TOPICS
+* - environment
+*     - https://jenkins.io/doc/book/pipeline/syntax/#environment
+* - archiveArtifacts
+*     - https://jenkins.io/doc/pipeline/steps/core/#archiveartifacts-archive-the-artifacts
+*/
+
 pipeline {
 
     agent any
@@ -10,7 +18,7 @@ pipeline {
 
         stage('write file') {
             steps {
-                 writeFile( file: "output.txt", text: "${OUTPUT_TEXT}")
+                 writeFile( file: fileName, text: "${OUTPUT_TEXT}")
             }
         }
 
