@@ -14,4 +14,6 @@
 5. グローバルセキュリティの設定を開く
    http://{YOUR_JENKINS_HOST}/configureSecurity/
 6. Enable script security for Job DSL scripts のチェックを外す。
-   - "ERROR: script not yet approved for use" が出てしまうため。
+    - "ERROR: script not yet approved for use" が出てしまうため。
+7. pluginの追加
+    - job DSL
