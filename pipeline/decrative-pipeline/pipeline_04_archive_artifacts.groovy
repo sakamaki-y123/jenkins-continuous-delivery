@@ -3,14 +3,19 @@ pipeline {
     agent any
 
     stages {
-        stage('archive artifacts') {
 
-            environment {
-                fileName = "output.txt"
-            }
+        environment {
+            fileName = "output.txt"
+        }
 
+        stage('write file') {
             steps {
-                 writeFile( file: fileName, text: "${OUTPUT_TEXT}")
+                 writeFile( file: "output.txt", text: "${OUTPUT_TEXT}")
+            }
+        }
+
+        stage('archive artifacts') {
+            steps {
                  archiveArtifacts fileName
             }
         }
