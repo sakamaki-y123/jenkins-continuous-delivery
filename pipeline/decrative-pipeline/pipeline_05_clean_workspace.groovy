@@ -2,15 +2,15 @@ pipeline {
 
     agent any
 
+    environment {
+        fileName = "output.txt"
+    }
+
     stages {
-        
-        environment {
-            fileName = "output.txt"
-        }
 
         stage('write file') {
             steps {
-                 writeFile( file: "output.txt", text: "${OUTPUT_TEXT}")
+                 writeFile( file: fileName, text: "${OUTPUT_TEXT}")
             }
         }
 

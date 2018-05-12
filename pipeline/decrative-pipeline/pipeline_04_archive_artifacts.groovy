@@ -2,11 +2,11 @@ pipeline {
 
     agent any
 
-    stages {
+    environment {
+        fileName = "output.txt"
+    }
 
-        environment {
-            fileName = "output.txt"
-        }
+    stages {
 
         stage('write file') {
             steps {
