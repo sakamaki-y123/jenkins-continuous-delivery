@@ -18,7 +18,10 @@ pipeline {
                         'jobdsl/pipeline/pipeline_04_archive_artifacts.groovy'
                     ].join('\n'),
                     additionalParameters: [
-                        FOLDER_PATH: "${FOLDER_PATH}"
+                        FOLDER_PATH: "${FOLDER_PATH}",
+                        GIT_HUB_OWNER_AND_PROJECT: "sakamaki-y123/jenkins-continuous-delivery",
+                        GIT_HUB_PROTOCOL:"https",
+                        GIT_HUB_BRANCH: "*/master"
                     ]
                 )
             }

@@ -1,9 +1,6 @@
 def folderPath = "${FOLDER_PATH}"
 def jobName = "${FOLDER_PATH}" + "/" + "04_archive_artifacts"
-def jobDescription = "archive_artifacts"
-
-def githubUrl = "sakamaki-y123/jenkins-continuous-delivery"
-def githubBranch = "*/master"
+def jobDescription = "04_archive_artifacts"
 
 pipelineJob(jobName) {
 	description(jobDescription)
@@ -16,9 +13,9 @@ pipelineJob(jobName) {
 			scm {
 				git {
 					remote {
-						github(githubUrl, "https")
+						github("${GIT_HUB_OWNER_AND_PROJECT}", "${GIT_HUB_PROTOCOL}")
 					}
-					branch(githubBranch)
+					branch("${GIT_HUB_BRANCH}")
 				}
 			}
 			scriptPath("pipeline/decrative-pipeline/pipeline_04_archive_artifacts.groovy")
