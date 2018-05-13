@@ -31,7 +31,7 @@ pipeline {
 
     post{
         success{
-                cleanWs()
+            cleanWs()
         }
     }
 }
