@@ -21,7 +21,8 @@ pipeline {
                         'jobdsl/pipeline/pipeline_07_read_json.groovy',
                         'jobdsl/pipeline/pipeline_08_parallel_step.groovy',
                         'jobdsl/pipeline/pipeline_09_agent_docker.groovy',
-                        'jobdsl/pipeline/pipeline_10_use_multiple_docker.groovy'
+                        'jobdsl/pipeline/pipeline_10_use_multiple_docker.groovy',
+                        'jobdsl/pipeline/pipeline_11_read_and_write_yaml.groovy'
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
@@ -33,5 +34,4 @@ pipeline {
             }
         }
     }
-
 }
