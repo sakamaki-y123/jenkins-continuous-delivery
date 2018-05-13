@@ -1,6 +1,6 @@
 def folderPath = "${FOLDER_PATH}"
-def jobName = "${FOLDER_PATH}" + "/" + "10_use_multiple_docker"
-def jobDescription = "10_use_multiple_docker"
+def jobName = "${FOLDER_PATH}" + "/" + "11_read_and_write_yaml"
+def jobDescription = "11_read_and_write_yaml"
 
 pipelineJob(jobName) {
 	description(jobDescription)
@@ -16,7 +16,7 @@ pipelineJob(jobName) {
 					branch("${GIT_HUB_BRANCH}")
 				}
 			}
-			scriptPath("pipeline/decrative-pipeline/pipeline_10_use_multiple_docker.groovy")
+			scriptPath("pipeline/decrative-pipeline/pipeline_11_read_and_write_yaml.groovy")
 		}
 	}
 	disabled(false)

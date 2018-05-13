@@ -1,5 +1,5 @@
 /**
-* TOPICS OF THIS PIPELINE
+* TOPICS
 * - pipeline
 *     - https://jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline
 * - agent

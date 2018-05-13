@@ -1,5 +1,5 @@
 /**
-* TOPICS OF THIS PIPELINE
+* TOPICS
 * - writeFile
 *     - https://jenkins.io/doc/pipeline/steps/workflow-basic-steps/#writefile-write-file-to-workspace
 */

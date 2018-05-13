@@ -1,5 +1,5 @@
 /**
-* TOPICS OF THIS PIPELINE
+* TOPICS
 * - sh
 *     - https://jenkins.io/doc/pipeline/steps/workflow-durable-task-step/#sh-shell-script
 */

@@ -1,9 +1,9 @@
 /**
  * TOPICS
- * - agent none
- *     - https://jenkins.io/doc/book/pipeline/syntax/#agent
- * - using multiple docker containers
- *     - https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers
+ * - readYaml
+ *     - https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#code-readyaml-code-read-yaml-from-files-in-the-workspace-or-text
+ * - writeYaml
+ *     - https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#code-writeyaml-code-write-a-yaml-from-an-object
  */
 
 def SAMPLE_YAML = """\
@@ -17,7 +17,7 @@ dates:
 def datas
 
 pipeline {
-    agent none
+    agent any
 
     environment {
         fileName = "sample.yml"
@@ -27,14 +27,14 @@ pipeline {
         stage('read yaml') {
             steps {
                 script{
-                    def datas = readYaml text: "${SAMPLE_YAML}"
+                    datas = readYaml text: "${SAMPLE_YAML}"
                     echo "Name is ${datas.name.first} ${datas.name.last}"
                     echo "Birthday is ${datas.dates.birth}"
                 }
             }
         }
 
-        stage('read and write yaml') {
+        stage('write yaml') {
             steps {
                 script{
                     datas.name.first = "Ichiro"
