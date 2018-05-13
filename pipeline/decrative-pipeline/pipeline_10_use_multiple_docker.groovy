@@ -1,19 +1,32 @@
 /**
  * TOPICS
- * - agent docker
- *     - https://jenkins.io/doc/book/pipeline/docker/
+ * - agent none
+ *     - https://jenkins.io/doc/book/pipeline/syntax/#agent
+ * - using multiple docker containers
+ *     - https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers
  */
 
 pipeline {
-
-    agent {
-        docker { 
-            image 'node:7-alpine' 
-        }
-    }
+    agent none
 
     stages {
-        stage('version') {
+        stage('Back-end') {
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                }
+            }
+            steps {
+                sh 'mvn --version'
+            }
+        }
+
+        stage('Front-end') {
+            agent {
+                docker {
+                    image 'node:7-alpine'
+                }
+            }
             steps {
                 sh 'node --version'
             }
