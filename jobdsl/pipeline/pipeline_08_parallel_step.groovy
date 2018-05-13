@@ -16,7 +16,7 @@ pipelineJob(jobName) {
 					branch("${GIT_HUB_BRANCH}")
 				}
 			}
-			scriptPath("pipeline/decrative-pipeline/08_parallel_step.groovy")
+			scriptPath("pipeline/decrative-pipeline/pipeline_08_parallel_step.groovy")
 		}
 	}
 	disabled(false)
