@@ -19,8 +19,13 @@ Jenkinsfileは[こちら](https://github.com/sakamaki-y123/jenkins-continuous-de
 # サンプル集 - Sample pipelines
 
 * 利用している実行環境
- * ubuntu 16.04
- * Jenkins 2.107.3
+    * ubuntu 16.04
+    * Jenkins 2.107.3
+* gihub
+    * https://github.com/sakamaki-y123/jenkins-continuous-delivery
+* Sample jenkins
+    * http://118.27.19.114:8080/job/decrative-pipeline/
+ 
 
 ## 1. hello world
 まずはhello worldをやってみます。
