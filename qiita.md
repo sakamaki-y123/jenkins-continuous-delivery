@@ -13,6 +13,8 @@ Declarative Pipeline ではよりシンプルな記述が可能になりまし�
 Jenkinsfileは[こちら](https://github.com/sakamaki-y123/jenkins-continuous-delivery)コミットしてありますので、併せて紹介をしていきます。
 また関連するページもサンプルごとに随時紹介をしていきます。
 
+ここで紹介するsampleを実行できるサーバーを立てていますので、実際に触ってください。
+
 ---
 # サンプル集 - Sample pipelines
 
@@ -44,7 +46,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_01_hello_world.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_01_hello_world.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/01_hello_world/)
 
 ---
 ## 2. sh step を使ってコマンドを実行する
@@ -67,7 +71,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_02_use_sh_step.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_02_use_sh_step.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/02_use_sh_step/)
 
 ---
 ## 3. ファイルの書き込みをする
@@ -91,7 +97,10 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_03_write_file.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_03_write_file.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/03_write_file/)
+
 
 ---
 ## 4. ファイルを成果物として保存する。
@@ -130,7 +139,9 @@ pipeline {
 }
 
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_04_archive_artifacts.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_04_archive_artifacts.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/04_archive_artifacts/)
 
 ---
 ## 5. buildの後にワークスペースをクリーンします。
@@ -173,7 +184,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_05_clean_workspace.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_05_clean_workspace.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/05_clean_workspace/)
 
 ---
 ## 6.ほかのジョブから取得した成果物を表示する。
@@ -232,7 +245,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_06_copy_artifacts.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_06_copy_artifacts.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/06_copy_artifacts/)
 
 ---
 ## 7. json を読み込んで使ってみる
@@ -261,7 +276,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_07_read_json.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_07_read_json.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/07_read_json/)
 
 ---
 ## 8. ほかのジョブを並列実行で呼び出す。
@@ -302,7 +319,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_08_parallel_step.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_08_parallel_step.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/08_parallel_step/)
 
 ---
 
@@ -332,7 +351,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_09_agent_docker.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_09_agent_docker.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/09_agent_docker/)
 
 ---
 
@@ -374,7 +395,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_10_use_multiple_docker.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_10_use_multiple_docker.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/10_use_multiple_docker/)
 
 ---
 
@@ -444,7 +467,10 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_11_read_and_write_yaml.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_11_read_and_write_yaml.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/11_read_and_write_yaml/)
+
 
 ---
 
@@ -540,7 +566,9 @@ pipeline {
     }
 }
 ```
-[sorce file](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_12_input_request.groovy)
+**link**
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_12_input_request.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/12_input_request/)
 
 ---
 
