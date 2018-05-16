@@ -4,8 +4,11 @@ def jobDescription = "07_read_json"
 
 pipelineJob(jobName) {
 	description(jobDescription)
+	logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
 	keepDependencies(false)
-
 	definition {
 		cpsScm {
 			scm {

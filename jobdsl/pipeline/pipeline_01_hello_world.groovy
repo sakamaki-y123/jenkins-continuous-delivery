@@ -5,6 +5,10 @@ def jobDescription = "01_hello_world job"
 pipelineJob(jobName) {
 	description(jobDescription)
 	keepDependencies(false)
+    logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
 	definition {
 		cpsScm {
 			scm {

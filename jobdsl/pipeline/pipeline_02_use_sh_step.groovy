@@ -5,6 +5,10 @@ def jobDescription = "02_use_sh_step"
 pipelineJob(jobName) {
 	description(jobDescription)
 	keepDependencies(false)
+	logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
 	definition {
 		cpsScm {
 			scm {

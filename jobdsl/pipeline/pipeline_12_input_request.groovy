@@ -4,8 +4,11 @@ def jobDescription = "12_input_request"
 
 pipelineJob(jobName) {
 	description(jobDescription)
+	logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
 	keepDependencies(false)
-
 	definition {
 		cpsScm {
 			scm {

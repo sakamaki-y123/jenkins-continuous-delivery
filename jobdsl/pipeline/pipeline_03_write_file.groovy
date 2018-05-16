@@ -5,6 +5,10 @@ def jobDescription = "03_write_file"
 pipelineJob(jobName) {
 	description(jobDescription)
 	keepDependencies(false)
+	logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
 	parameters {
 		textParam("OUTPUT_TEXT", "", "")
 	}

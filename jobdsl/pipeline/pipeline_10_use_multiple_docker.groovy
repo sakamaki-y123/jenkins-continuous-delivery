@@ -4,8 +4,11 @@ def jobDescription = "10_use_multiple_docker"
 
 pipelineJob(jobName) {
 	description(jobDescription)
+	logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
+    }
 	keepDependencies(false)
-
 	definition {
 		cpsScm {
 			scm {
