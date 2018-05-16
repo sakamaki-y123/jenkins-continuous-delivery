@@ -13,9 +13,9 @@
 
 ## add plugins
 1. job DSL
-2. Pipeline Utility Steps
-3. Blue Ocean
-
+1. Pipeline Utility Steps
+1. Copy Artifact
+1. Blue Ocean
 
 ## disable Enable script security for Job DSL scripts
 1. グローバルセキュリティの設定を開く
@@ -33,8 +33,8 @@ sudo apt-key adv \
     --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
 echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
 sudo apt-get update
-sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
-sudo apt-get install docker-engine
+sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual
+sudo apt-get install -y docker-engine
 sudo service docker start
 sudo usermod -aG docker jenkins
 sudo reboot
