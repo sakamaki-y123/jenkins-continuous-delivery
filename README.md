@@ -11,14 +11,14 @@
                 - リポジトリURL: https://github.com/sakamaki-y123/jenkins-continuous-delivery
                 - Script Path: pipeline/decrative-pipeline/pipeline_00_seed_pipeline.groovy
 
+## add plugins
+1. job DSL
+
 ## disable Enable script security for Job DSL scripts
 1. グローバルセキュリティの設定を開く
    http://{YOUR_JENKINS_HOST}/configureSecurity/
 2. Enable script security for Job DSL scripts のチェックを外す。
     - "ERROR: script not yet approved for use" が出てしまうため。
-
-## add plugins
-1. job DSL
 
 ## enable docker in ubuntu 16.04
 ### docker install
