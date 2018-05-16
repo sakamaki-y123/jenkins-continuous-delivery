@@ -13,6 +13,9 @@
 
 ## add plugins
 1. job DSL
+2. Pipeline Utility Steps
+3. Blue Ocean
+
 
 ## disable Enable script security for Job DSL scripts
 1. グローバルセキュリティの設定を開く
