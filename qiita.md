@@ -52,8 +52,9 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_01_hello_world.groovy)
-* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/01_hello_world/)
+*  [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/01_hello_world/)
 
 ---
 ## 2. sh step を使ってコマンドを実行する
@@ -76,9 +77,11 @@ pipeline {
     }
 }
 ```
+
 **link**
-* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_02_use_sh_step.groovy)
-* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/02_use_sh_step/)
+
+*  [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_02_use_sh_step.groovy)
+*  [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/02_use_sh_step/)
 
 ---
 ## 3. ファイルの書き込みをする
@@ -145,6 +148,7 @@ pipeline {
 
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_04_archive_artifacts.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/04_archive_artifacts/)
 
@@ -190,6 +194,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_05_clean_workspace.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/05_clean_workspace/)
 
@@ -251,6 +256,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_06_copy_artifacts.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/06_copy_artifacts/)
 
@@ -282,6 +288,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_07_read_json.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/07_read_json/)
 
@@ -325,6 +332,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_08_parallel_step.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/08_parallel_step/)
 
@@ -357,6 +365,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_09_agent_docker.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/09_agent_docker/)
 
@@ -367,7 +376,7 @@ pipeline {
 ポイントは最初に`agente none` と設定し、stage ブロックの中で改めて利用するagentを指定することです。
 **topics**
 1. [agent none](https://jenkins.io/doc/book/pipeline/syntax/#agent)
-1. [using multiple docker containers](https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers)
+2. [using multiple docker containers](https://jenkins.io/doc/book/pipeline/docker/#using-multiple-containers)
 
 **sample code**
 
@@ -401,6 +410,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_10_use_multiple_docker.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/10_use_multiple_docker/)
 
@@ -412,7 +422,7 @@ YAMLのデータを書き換えてファイルに書き出すサンプルです�
 
 **topics**
 1. [readYaml](https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#code-readyaml-code-read-yaml-from-files-in-the-workspace-or-text)
-1. [writeYaml](https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#code-writeyaml-code-write-a-yaml-from-an-object)
+2. [writeYaml](https://jenkins.io/doc/pipeline/steps/pipeline-utility-steps/#code-writeyaml-code-write-a-yaml-from-an-object)
 
 **sample code**
 
@@ -473,6 +483,7 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_11_read_and_write_yaml.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/11_read_and_write_yaml/)
 
@@ -485,7 +496,7 @@ pipeline {
 
 **topics**
 1. [timeout](https://jenkins.io/doc/pipeline/steps/workflow-basic-steps/#code-timeout-code-enforce-time-limit)
-1. [input](https://jenkins.io/doc/pipeline/steps/pipeline-input-step/#code-input-code-wait-for-interactive-input)
+2. [input](https://jenkins.io/doc/pipeline/steps/pipeline-input-step/#code-input-code-wait-for-interactive-input)
 
 **sample code**
 
@@ -572,8 +583,64 @@ pipeline {
 }
 ```
 **link**
+
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_12_input_request.groovy)
 * [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/12_input_request/)
+
+---
+
+
+## 13. ステージの実行を条件ごとに制御する
+**topics**
+1. [when](https://jenkins.io/doc/book/pipeline/syntax/#when)
+
+**sample code**
+
+```conditional_run_stage.groovy
+def boolean skipStage( String startStageNo, String stageNo ){
+    if( startStageNo.toInteger() <= stageNo.toInteger() ){
+        return false
+    } else {
+        return true
+    }
+}
+
+pipeline {
+    agent any
+
+    stages {
+        stage('stage1') {
+
+            when {
+                environment name: 'START_STAGE_NO', value: '1'
+            }
+
+            steps {
+                echo "run stage 1"
+            }
+        }
+
+        stage('stage2') {
+
+            when{
+                not{
+                    expression {
+                        return skipStage( START_STAGE_NO, "2" )
+                    }
+                }
+            }
+            
+            steps {
+                echo "run stage 2"
+            }
+        }
+    }
+}
+```
+**link**
+
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_13_conditional_run_stage.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/13_conditional_run_stage/)
 
 ---
 
