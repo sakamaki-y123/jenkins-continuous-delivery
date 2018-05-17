@@ -591,8 +591,15 @@ pipeline {
 
 
 ## 13. ステージの実行を条件ごとに制御する
+when ブロックを使って、条件に応じてステージの実行を制御します。
+* environment 特定の文字列を比較する際に使います。
+* expression スクリプトの真偽値の判定に使います。
+
+pipeline内でファンクションを使用してサンプルを作りました。
+
 **topics**
 1. [when](https://jenkins.io/doc/book/pipeline/syntax/#when)
+2. [define function](https://www.cakesolutions.net/teamblogs/jenkins2-pipelines-101)
 
 **sample code**
 
@@ -658,4 +665,5 @@ pipeline {
 
 ## その他
 * [Jenkins 2.0 (3): Scripted Pipeline と Declarative Pipeline](http://www.kaizenprogrammer.com/entry/2017/02/14/230714)
+* [Jenkins2 Pipelines 101](https://www.cakesolutions.net/teamblogs/jenkins2-pipelines-101)
 
