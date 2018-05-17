@@ -24,7 +24,7 @@ pipeline {
                         'jobdsl/pipeline/pipeline_10_use_multiple_docker.groovy',
                         'jobdsl/pipeline/pipeline_11_read_and_write_yaml.groovy',
                         'jobdsl/pipeline/pipeline_12_input_request.groovy',
-                        'jobdsl/pipeline/pipeline_13_conditional_run_stage.groovy"'
+                        'jobdsl/pipeline/pipeline_13_conditional_run_stage.groovy'
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
