@@ -667,7 +667,7 @@ pipeline {
 
 ---
 
-## 14. gitからansible-playbookのスクリプトを取得し実行してみる
+## 14. gitからansible-playbookのスクリプトを取得しDockerContainerを使って実行する
 ansible-playbook をdocker を使ってhello worldするサンプルです。
 
 1. https://github.com/chusiang/helloworld.ansible.role からansible-playbookのsampleを取得。
