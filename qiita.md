@@ -51,6 +51,8 @@ pipeline {
     }
 }
 ```
+![01_hello_world.gif](https://qiita-image-store.s3.amazonaws.com/0/133430/c1998a7b-f084-1ecd-6001-d6d684bb7465.gif)
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_01_hello_world.groovy)
@@ -147,6 +149,9 @@ pipeline {
 }
 
 ```
+
+![04_archive_artifacts.gif](https://qiita-image-store.s3.amazonaws.com/0/133430/b7a9aa4e-c10b-10b5-2761-b72698bd1ffd.gif)
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_04_archive_artifacts.groovy)
@@ -193,6 +198,7 @@ pipeline {
     }
 }
 ```
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_05_clean_workspace.groovy)
@@ -331,6 +337,9 @@ pipeline {
     }
 }
 ```
+![08_parallel_step.gif](https://qiita-image-store.s3.amazonaws.com/0/133430/2cc42e3c-29f4-6fd5-10d6-ceb1d393a3ab.gif)
+
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_08_parallel_step.groovy)
@@ -364,6 +373,7 @@ pipeline {
     }
 }
 ```
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_09_agent_docker.groovy)
@@ -582,6 +592,9 @@ pipeline {
     }
 }
 ```
+![12_input_request.gif](https://qiita-image-store.s3.amazonaws.com/0/133430/6eed250e-597f-3a44-6a2d-1190bd949c75.gif)
+
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_12_input_request.groovy)
@@ -644,6 +657,9 @@ pipeline {
     }
 }
 ```
+![13_conditional_run_stage.gif](https://qiita-image-store.s3.amazonaws.com/0/133430/308abf92-4c2f-76d8-1ef8-1f94a44e8167.gif)
+
+
 **link**
 
 * [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_13_conditional_run_stage.groovy)
