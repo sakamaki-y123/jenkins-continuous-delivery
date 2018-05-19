@@ -667,6 +667,72 @@ pipeline {
 
 ---
 
+## 14. gitからansible-playbookのスクリプトを取得し実行してみる
+ansible-playbook をdocker を使ってhello worldするサンプルです。
+
+1. https://github.com/chusiang/helloworld.ansible.role からansible-playbookのsampleを取得。
+2. williamyeh/ansible:alpine3 のdocker image を利用してansible-playbook を実行。
+3. ansible.logを成果物に保存。
+
+**topics**
+1. [git](https://jenkins.io/doc/pipeline/steps/git/)
+2. [withDockerContainer](https://jenkins.io/doc/pipeline/steps/docker-workflow/#withdockercontainer-run-build-steps-inside-a-docker-container)
+3. [ansiblePlaybook](https://jenkins.io/doc/pipeline/steps/ansible/#ansibleplaybook-invoke-an-ansible-playbook)
+
+**sample code**
+
+```run_ansible.groovy
+def ANSIBLE_CONFIG = """\
+[defaults]
+log_path = ./ansible.log
+"""
+
+pipeline {
+    agent any
+
+    stages {
+        stage('set up ansible files') {
+            steps {
+                deleteDir()
+                git 'https://github.com/chusiang/helloworld.ansible.role'
+                writeFile(file: "ansible.cfg", text: "${ANSIBLE_CONFIG}")
+            }
+        }
+
+        stage('run helloworld.yml') {
+            steps {
+                withDockerContainer(args: '-u 0', image: 'williamyeh/ansible:alpine3') {
+                    echo "show ansible version"
+                    sh "ansible --version"
+
+                    echo "run ansible-playbook"
+                    ansiblePlaybook(
+                        playbook: 'setup.yml',
+                        extras: '-c local'
+                    )
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts 'ansible.log'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            cleanWs()
+        }
+    }
+}
+```
+**link**
+
+* [sorce code](https://github.com/sakamaki-y123/jenkins-continuous-delivery/blob/master/pipeline/decrative-pipeline/pipeline_14_run_ansible.groovy)
+* [Jenkins sample job](http://118.27.19.114:8080/job/decrative-pipeline/job/14_run_ansible/)
+
+---
+
 # 参考ページ
 
 ## jenkins 公式ページ
@@ -682,4 +748,6 @@ pipeline {
 ## その他
 * [Jenkins 2.0 (3): Scripted Pipeline と Declarative Pipeline](http://www.kaizenprogrammer.com/entry/2017/02/14/230714)
 * [Jenkins2 Pipelines 101](https://www.cakesolutions.net/teamblogs/jenkins2-pipelines-101)
+* https://github.com/chusiang/helloworld.ansible.role
+* https://hub.docker.com/r/williamyeh/ansible/
 
