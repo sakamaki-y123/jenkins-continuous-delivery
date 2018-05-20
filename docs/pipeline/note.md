@@ -60,7 +60,7 @@ https://jenkins.io/doc/book/pipeline/shared-libraries/#directory-structure
 return this がポイントらしい。
 
 ```groovy
-package src.main.groovy.pipeline.library;
+package main.groovy.pipeline.library;
 
 def boolean skipStage( String startStageNo, String stageNo ){
     if( startStageNo.toInteger() <= stageNo.toInteger() ){
@@ -74,12 +74,31 @@ return this
 
 ```
 
+## shared library の設定
+Jenkinsの管理 > システムの設定 > Global Pipeline Libraries
+からshared library を使うリポジトリを指定する。
+
+* name ：任意の名前 
+
+     例: jenkins-continuous-delivery
+
+* default version : ブランチ、タグ、コミットのハッシュ値等を入れる。
+
+    例: master
+
+* Load implicitly: @library が必要なくなるオプション。今まで通り使うならfalse
+* Allow default version to be overridden: オンの場合ライブラリのカスタムバージョンを選択することができるらしい。 default true 
+* Include @Library changes in job recent changes : default true
+* Retrieval method : gitを使いたいので Modern SCM を選ぶ
+* Git : https://github.com/sakamaki-y123/jenkins-continuous-delivery
+
+
 ## library の呼び出し
 scripted pipeline から呼び出しが可能
 
 ```groovy
 script{
-    def utils = new src.main.groovy.pipeline.library.Utils()
+    def utils = new main.groovy.pipeline.library.Utils()
     def final String START_STAGE_NO = "1"
     def final String STAGE_NO = "2"
     def shouldSkip = utils.skipStage( START_STAGE_NO, STAGE_NO )

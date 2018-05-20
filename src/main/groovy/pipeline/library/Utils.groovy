@@ -1,4 +1,4 @@
-package src.main.groovy.pipeline.library;
+package main.groovy.pipeline.library;
 
 def boolean skipStage( String startStageNo, String stageNo ){
     if( startStageNo.toInteger() <= stageNo.toInteger() ){
