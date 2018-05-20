@@ -1,7 +1,7 @@
 /**
  * TOPICS
- * - when
- *     - https://jenkins.io/doc/book/pipeline/syntax/#when
+ * - Pipeline Shared Libraries
+ *     - https://jenkins.io/doc/book/pipeline/shared-libraries/
  */
 
 @Library('jenkins-continuous-delivery')
@@ -11,40 +11,45 @@ def utils = new Utils()
 pipeline {
 
     agent any
-    
+
     stages {
-        
+
+        stage('stage0: crean workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
         stage('stage1: copy artifacts') {
-            when{
-                not{
+            when {
+                not {
                     expression {
-                        return utils.skipStage( START_STAGE_NO, "1" )
+                        return utils.skipStage(START_STAGE_NO, "1")
                     }
                 }
             }
 
             steps {
-                script{
-                    deleteDir()
+                script {
                     def projectNameList = "${COPY_ARTIFACTS_PROJECTS}".split()
-                    utils.copySomeArtifacts(projectNameList)
+                    utils.copyMultipleArtifacts(projectNameList)
                 }
             }
         }
 
         stage('stage2: find files') {
-            when{
-                not{
+            when {
+                not {
                     expression {
-                        return utils.skipStage( START_STAGE_NO, "2" )
+                        return utils.skipStage(START_STAGE_NO, "2")
                     }
                 }
             }
             steps {
-                script{
+                script {
                     try {
                         utils.findWorkSpaceFiles()
-                    } catch ( Exception e){
+                    } catch (Exception e) {
                         error e.getMessage()
                     }
                 }
