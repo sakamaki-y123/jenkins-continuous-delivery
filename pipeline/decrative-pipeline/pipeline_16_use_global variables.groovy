@@ -5,17 +5,17 @@
  */
 
 @Library('jenkins-continuous-delivery')_
-import main.groovy.pipeline.library.Utils
-def utils = new Utils()
 
 pipeline {
     agent any
-    stage ('Example') {
-        steps {
-             script { 
-                 log.info 'Starting'
-                 log.warning 'Nothing to do!'
-             }
+    stages{
+        stage ('Example') {
+            steps {
+                script { 
+                    log.info 'Starting'
+                    log.warning 'Nothing to do!'
+                }
+            }
         }
     }
 }
