@@ -16,3 +16,72 @@ jobDsl(
 ```
 
 https://github.com/jenkinsci/job-dsl-plugin/wiki/User-Power-Moves#use-job-dsl-in-pipeline-scripts
+
+# shared library
+
+様々なパイプラインで共通に利用できるロジックをshared library に定義することで冗長性を減らしコードをドライにすることができる。
+
+## package階層
+https://jenkins.io/doc/book/pipeline/shared-libraries/#directory-structure
+
+<pre>
+(root)
++- src                     # Groovy source files
+|   +- main
+|       +- groovy
+|           +- Utils.groovy  # for main.groovy.Utils class
++- vars
+|   +- foo.groovy          # for global 'foo' variable
+|   +- foo.txt             # help for 'foo' variable
++- resources               # resource files (external libraries only)
+|   +- org
+|       +- foo
+|           +- bar.json    # static helper data for org.foo.Bar
+</pre>
+
+* src
+
+    標準のJavaソースディレクトリ構造。
+    このディレクトリは、パイプラインを実行するときにクラスパスに追加されます。
+    主な用途 ファンクションを定義する。
+
+* vars
+
+    パイプラインからアクセス可能なグローバル変数/関数を定義する。
+
+* resources
+
+    関連する非Groovyのファイルをロードするために使用します。
+    主な用途 yaml,json,shなどを置いておき適宜呼び出す.
+## library の作成
+
+サンプル
+
+return this がポイントらしい。
+
+```groovy
+package src.main.groovy.pipeline.library;
+
+def boolean skipStage( String startStageNo, String stageNo ){
+    if( startStageNo.toInteger() <= stageNo.toInteger() ){
+        return false
+    } else {
+        return true
+    }
+}
+
+return this
+
+```
+
+## library の呼び出し
+scripted pipeline から呼び出しが可能
+
+```groovy
+script{
+    def utils = new src.main.groovy.pipeline.library.Utils()
+    def final String START_STAGE_NO = "1"
+    def final String STAGE_NO = "2"
+    def shouldSkip = utils.skipStage( START_STAGE_NO, STAGE_NO )
+}
+```
