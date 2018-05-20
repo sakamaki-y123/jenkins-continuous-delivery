@@ -15,6 +15,7 @@ pipelineJob(jobName) {
         artifactNumToKeep(5)
     }
 	parameters {
+		choiceParam("START_STAGE_NO", ["1","2","3"], "select start stage no")
 		textParam("COPY_ARTIFACTS_PROJECTS", "${COPY_ARTIFACTS_PROJECTS}", "input copy artifacts project separated by newlines")
 	}
 	definition {
