@@ -10,6 +10,7 @@ def boolean skipStage( String startStageNo, String stageNo ){
 
 def copySomeArtifacts( projectNameList ){
     for( projectName in projectNameList ){
+        echo "copy artifacts from ${projectName}"
         copyArtifacts(projectName:"${projectName}")
     }    
 }
