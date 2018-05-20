@@ -31,7 +31,7 @@ pipeline {
 
             steps {
                 script{
-                    projectNameList = COPY_ARTIFACTS_PROJECTS.sprit(System.getProperty("line.separator"))
+                    projectNameList = COPY_ARTIFACTS_PROJECTS.sprit("\r\n")
                     utils.copyArtifacts(projectNameList)
                 }
             }
