@@ -6,6 +6,7 @@
 
 @Library('jenkins-continuous-delivery')
 import main.groovy.pipeline.library.Utils
+import java.lang.String
 def utils = new Utils()
 
 pipeline {
@@ -31,8 +32,8 @@ pipeline {
 
             steps {
                 script{
-                    projectNameList = COPY_ARTIFACTS_PROJECTS.sprit("\r\n")
-                    utils.copyArtifacts(projectNameList)
+                    def projectNameList = "${COPY_ARTIFACTS_PROJECTS}".split()
+                    utils.copySomeArtifacts(projectNameList)
                 }
             }
         }
