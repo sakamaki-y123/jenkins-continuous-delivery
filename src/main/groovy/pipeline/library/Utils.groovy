@@ -9,8 +9,8 @@ def boolean skipStage( String startStageNo, String stageNo ){
 }
 
 def copyArtifacts( List projectNameList ){
-    for( project in projectNameList ){
-        copyArtifacts(projectName:"${params.COPY_SOURCE_PROJECT}")
+    for( projectName in projectNameList ){
+        copyArtifacts(projectName:"${projectName}")
     }    
 }
 
