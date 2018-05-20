@@ -739,6 +739,7 @@ pipeline {
 * [Using a Jenkinsfile ](https://jenkins.io/doc/book/pipeline/jenkinsfile/)
 * [Pipeline Syntax](https://jenkins.io/doc/book/pipeline/syntax/#declarative-pipeline)
 * [Pipeline Steps Reference](https://jenkins.io/doc/pipeline/steps/)
+* [Pipeline Shared Libraries](https://jenkins.io/doc/book/pipeline/shared-libraries/)
 
 ## Qiita
 * [Jenkins2のPipline参考リンク集](https://qiita.com/Takumon/items/e266146c225d07b82c13#declarative-pipeline)
@@ -750,4 +751,5 @@ pipeline {
 * [Jenkins2 Pipelines 101](https://www.cakesolutions.net/teamblogs/jenkins2-pipelines-101)
 * https://github.com/chusiang/helloworld.ansible.role
 * https://hub.docker.com/r/williamyeh/ansible/
+* https://automatingguy.com/2017/12/29/jenkins-pipelines-shared-libraries/
 
