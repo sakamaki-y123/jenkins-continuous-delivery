@@ -4,16 +4,23 @@
  *     - https://jenkins.io/doc/book/pipeline/syntax/#when
  */
 
-@library('jenkins-continuous-delivery')
+@Library('jenkins-continuous-delivery')
 import main.groovy.pipeline.library.Utils
 def utils = new Utils()
 
 pipeline {
-    agent any
 
+    agent any
+    
     stages {
-        stage('stage1') {
-            
+
+        stage('stage0: delete workspace') {
+            steps {
+                deleteDir()
+            }
+        }
+
+        stage('stage1: copy artifacts') {
             when{
                 not{
                     expression {
@@ -23,12 +30,14 @@ pipeline {
             }
 
             steps {
-                echo "run stage 1"
+                script{
+                    projectNameList = COPY_ARTIFACTS_PROJECTS.sprit(System.getProperty("line.separator"))
+                    utils.copyArtifacts(projectNameList)
+                }
             }
         }
 
-        stage('stage2') {
-
+        stage('stage2: find files') {
             when{
                 not{
                     expression {
@@ -36,9 +45,10 @@ pipeline {
                     }
                 }
             }
-            
             steps {
-                echo "run stage 2"
+                script{
+                    utils.findFiles()
+                }
             }
         }
     }
