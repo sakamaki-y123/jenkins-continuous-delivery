@@ -13,13 +13,7 @@ pipeline {
     agent any
     
     stages {
-
-        stage('stage0: delete workspace') {
-            steps {
-                deleteDir()
-            }
-        }
-
+        
         stage('stage1: copy artifacts') {
             when{
                 not{
@@ -31,6 +25,7 @@ pipeline {
 
             steps {
                 script{
+                    deleteDir()
                     def projectNameList = "${COPY_ARTIFACTS_PROJECTS}".split()
                     utils.copySomeArtifacts(projectNameList)
                 }
@@ -47,7 +42,11 @@ pipeline {
             }
             steps {
                 script{
-                    utils.findWorkSpaceFiles()
+                    try {
+                        utils.findWorkSpaceFiles()
+                    } catch ( Exception e){
+                        error e.getMessage()
+                    }
                 }
             }
         }

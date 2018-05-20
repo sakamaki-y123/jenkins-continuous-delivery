@@ -97,10 +97,27 @@ Jenkinsの管理 > システムの設定 > Global Pipeline Libraries
 scripted pipeline から呼び出しが可能
 
 ```groovy
-script{
-    def utils = new main.groovy.pipeline.library.Utils()
-    def final String START_STAGE_NO = "1"
-    def final String STAGE_NO = "2"
-    def shouldSkip = utils.skipStage( START_STAGE_NO, STAGE_NO )
+@Library('jenkins-continuous-delivery')
+import main.groovy.pipeline.library.Utils
+
+pipeline {
+    agent any
+
+    stages {
+        stage('stage1') {
+            steps {
+                script{
+                    def utils = new Utils()
+                    def final String START_STAGE_NO = "1"
+                    def final String STAGE_NO = "2"
+                    def shouldSkip = utils.skipStage( START_STAGE_NO, STAGE_NO )
+                }
+            }
+        }
+    }
 }
 ```
+
+### 既存モジュールと同じ名前のファンクションは作れない。
+
+findFiles はすでにあるモジュールなので同じ名前では作れない。
