@@ -6,7 +6,6 @@
 
 @Library('jenkins-continuous-delivery')
 import main.groovy.pipeline.library.Utils
-import java.lang.String
 def utils = new Utils()
 
 pipeline {
