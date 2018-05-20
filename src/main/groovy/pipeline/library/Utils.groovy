@@ -14,7 +14,7 @@ def copySomeArtifacts( projectNameList ){
     }    
 }
 
-def findFiles(pattern = '*.*' ){
+def findWorkSpaceFiles(pattern = '*.*' ){
     files = findFiles(glob: '*.*')
     for (file in files) {
         echo file.name

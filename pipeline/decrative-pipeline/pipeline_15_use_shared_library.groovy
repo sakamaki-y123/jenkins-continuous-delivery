@@ -48,7 +48,7 @@ pipeline {
             }
             steps {
                 script{
-                    utils.findFiles()
+                    utils.findWorkSpaceFiles()
                 }
             }
         }
