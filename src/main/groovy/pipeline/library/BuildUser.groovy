@@ -1,5 +1,8 @@
 package main.groovy.pipeline.library;
 
+
+// need user build vars plugin
+
 def String getFullName() {
     wrap([$class: 'BuildUser']) {
         return "${BUILD_USER}"
