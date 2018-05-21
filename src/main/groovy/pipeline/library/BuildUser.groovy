@@ -1,3 +1,5 @@
+package main.groovy.pipeline.library;
+
 def String getFullName() {
     wrap([$class: 'BuildUser']) {
         return "${BUILD_USER}"
@@ -27,3 +29,5 @@ def String getEmail() {
         return "${BUILD_USER_EMAIL}"
     }
 }
+
+return this
