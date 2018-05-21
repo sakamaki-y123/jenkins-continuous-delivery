@@ -12,8 +12,7 @@ pipeline {
         stage ('Example') {
             steps {
                 script { 
-                    log.info 'Starting'
-                    log.warning 'Nothing to do!'
+                    log.info "executed by " + user.getFullName()
                 }
             }
         }

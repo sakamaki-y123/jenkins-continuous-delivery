@@ -21,8 +21,12 @@ https://github.com/jenkinsci/job-dsl-plugin/wiki/User-Power-Moves#use-job-dsl-in
 
 様々なパイプラインで共通に利用できるロジックをshared library に定義することで冗長性を減らしコードをドライにすることができる。
 
-## package階層
+参考ページ
+
 https://jenkins.io/doc/book/pipeline/shared-libraries/#directory-structure
+https://automatingguy.com/2017/12/29/jenkins-pipelines-shared-libraries/
+
+## package階層
 
 <pre>
 (root)
@@ -43,11 +47,12 @@ https://jenkins.io/doc/book/pipeline/shared-libraries/#directory-structure
 
     標準のJavaソースディレクトリ構造。
     このディレクトリは、パイプラインを実行するときにクラスパスに追加されます。
-    主な用途 ファンクションを定義する。
+    import を使うことで呼び出せるようになる。
 
 * vars
 
     パイプラインからアクセス可能なグローバル変数/関数を定義する。
+    スクリプトから常時参照可能なcustome stepを用意する際に使う。
 
 * resources
 
@@ -94,7 +99,13 @@ Jenkinsの管理 > システムの設定 > Global Pipeline Libraries
 
 
 ## library の呼び出し
+### 1. src ディレクトリにコミットしたもの。
+
 scripted pipeline から呼び出しが可能
+
+- point
+    - import
+    - new
 
 ```groovy
 @Library('jenkins-continuous-delivery')
@@ -111,6 +122,28 @@ pipeline {
                     def final String START_STAGE_NO = "1"
                     def final String STAGE_NO = "2"
                     def shouldSkip = utils.skipStage( START_STAGE_NO, STAGE_NO )
+                }
+            }
+        }
+    }
+}
+```
+
+### 2. vars ディレクトリにコミットしたもの。
+
+- point
+    - `_` が必要。
+
+```groovy
+@Library('jenkins-continuous-delivery')_
+
+pipeline {
+    agent any
+    stages{
+        stage ('Example') {
+            steps {
+                script { 
+                    log.info "executed by " + user.getFullName()
                 }
             }
         }
