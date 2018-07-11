@@ -5,8 +5,8 @@ package main.groovy.pipeline.library;
  */
 
 def call( sendChannel, buildStatus = 'STARTED') {
-    teamDomain: "${env.DEFAULT_SLACK_TEAM_DOMAIN}"
-    token: "${env.DEFAULT_SLACK_TOKEN}"
+    def teamDomain: "${env.DEFAULT_SLACK_TEAM_DOMAIN}"
+    def token: "${env.DEFAULT_SLACK_TOKEN}"
 
     // build status of null means successful
     buildStatus = buildStatus ?: 'SUCCESS'
