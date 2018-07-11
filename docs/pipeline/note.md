@@ -154,3 +154,9 @@ pipeline {
 ### 既存モジュールと同じ名前のファンクションは作れない。
 
 findFiles はすでにあるモジュールなので同じ名前では作れない。
+
+
+### pipleine のファンクション
+
+@NonCPS について
+http://arasio.hatenablog.com/entry/2016/10/08/220843
