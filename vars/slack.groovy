@@ -4,7 +4,7 @@ package main.groovy.pipeline.library;
  * Send notifications based on build status string
  */
 
-def call( slackChannel, buildStatus = 'STARTED') {
+def call( sendChannel, buildStatus = 'STARTED') {
     teamDomain: "${env.DEFAULT_SLACK_TEAM_DOMAIN}"
     token: "${env.DEFAULT_SLACK_TOKEN}"
 
