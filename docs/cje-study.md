@@ -156,7 +156,7 @@ tests
     - Setup in Manage System the location on disk or download from there
     - Ex: JDK, Maven, Git
     - Can install automatically or from file system
-- Installation Wizard [new] ★
+- Installation Wizard [new] ★---
   - What is the Jenkins Installation Wizard?
   - How to use the Wizard?
   - Which configurations are covered by the Installation Wizard?
@@ -167,41 +167,163 @@ tests
 
 - Jobs
   - Organizing jobs in Jenkins
+    - Jobs are organized in folders
   - Parameterized jobs
+    - Check “This build is parameterized” and enter parameters/default values
+    - Run directly with “Build with Parameters” or call from upstream job with “trigger parameterized build” post build action and passing parameters
   - Usage of Freestyle/Pipeline/Matrix jobs
+    - Freestyle – most flexible job
+    - ipeline – enter code in DSL. There is a snippet generator which generates the Groovy for common operations and lists the available environment variables.
+    - Matrix (multi-config) – Specify a configuration matrix with one or more dimensions. Runs all combinations when build.
+      - Axis: slave, label (for slave) or user defined (string)
+      - Combination filter: if don’t want cross product of all axis to run
+      - Can execution “touchstone” builds first to specify which job(s) should run first and if this should skip the others
+    - Maven  - less options than Freestyle since can assume based on Maven conventions
+    - Literate – brand new plugin (Dec 2015) – allows specifying build commands in README.md file in source control. A literate job is a type of multi-branch job. (searches for new branches and creates jobs in folder automatically)
 - Builds
   - Setting up build steps and triggers
+    - Common build steps include Maven/Ant, execute shell, start/stop Docker containe
+    - Common triggers include time/periodic, SCM polling, upon completion of another job
   - Configuring build tools
+    - In Manage Jenkins > Manage System
+    - Install automatically or via system
   - Running scripts as part of build steps
+    - Can run OS script or Groovy script
+    - Groovy scripts can run as system or user level. System has access to Jenkins object model
 - Source Code Management
   - Polling source code management
+    - Set schedule using cron format
+      - minute hour dayOfMonth month dayOfWeek
+      - For dayofWeek, 0 is Sunday and 7 is Saturday
+      - Can use H (or H/2 etc) for minute column to use a hash based on the job name to distribute jobs so don’t all start at the top of the hour.
+      - Also support, @yearly, @annually, @monthly, @weekly, @daily, @hourly and @midnight
+      - @Midnight means between midnight and one am since uses hash to distribute
+    - e.g. 
+      ```
+      @weekly 
+      At 00:00 on Sunday.
+
+      5 0 * 8 * 
+      At 00:05 in August.
+      
+      0 22 * * 1-5 
+      At 22:00 on every day-of-week from Monday through Friday.
+      
+      23 0-20/2 * * *
+      At minute 23 past every 2nd hour from 0 through 20.
+      ```
+    - Required URL
+    - Optional credentials
+    - Options vary by repo. Ex: SVN lets you specify infinity/immediates/etc as checkout depth. Git lets you specify a branch specifier
+    - Options vary by repo. Ex: SVN lets you specify infinity/immediates/etc as checkout depth. Git lets you specify a branch specifier
   - Creating hooks
+    - Hook script in repository triggers job
+    - Ex: Github plugin provides hook
   - Including version control tags and version information
+    - Git allows you to create a tag for every build
+    - Version Number plugin lets you include info in build name
+
 - Testing
   - Testing for code coverage
+    - In build, must create XML file with data
+    - Post Build Action to publish
+    - For Java: Cobertura and JaCoCo
+    - In Cobertura, can set thresholds for weather icons:
+      - Sunny - % higher than threshold
+      - Stormy - % lower than threshold
+      - Unstable - % lower than threshold
+    - In Jacoco, can set thresholds for sunny and stormy
   - Test reports in Jenkins
+    - Publish JUnit or TestNG reports
+    - In JUnit, can set amplification factor - 1.0 means 10% failure rate scores 90% health. .1 means 10% failure rate scores 99% health.
   - Displaying test results
+    - Configure as Post Build Action
+    - Point to xml files: ex: reports/*.xml
+    - an drill down to see details of tests runs and durations
   - Integrating with test automation tools
+    - Can run acceptance tests later in pipeline than unit/component tests
   - Breaking builds
+    - JUnit allows choosing whether to fail builds on test failures - default is “unstable” not failure
 - Notifications
   - Setup and usage
+    - Setup in post build action section
   - Email notifications, instant messaging
+    - Email
+      - Same recipient for each one (except can add committers since passed)
+    - Email ext 
+      - lets you customize the message and tailor the recipients per trigger
+      - can send on failing, still failing, unstable, still unstable, successful, etc
+    - Jabber and IRC for instant messaging
+    - Since build radiators are full screen, the only way to edit is to add /configure to the URL
   - Alarming on notifications
+    - Extreme notifications can have a video or audio cue in the real world
 - Distributed Builds
   - Setting up and running builds in parallel
+    - Builds run on different executors
+    - Multi-configuration jobs run the pieces in parallel
   - Setting up and using SSH agents, JNLP agents, cloud agents
+    - Can launch local slaves with SSH (blocking or non-blocking IO), Java Web
   - Monitoring nodes
+    - Monitoring page uses JMelody
+    - Memory/CPU/etc stats
+    - Can see heap dump/GC/etc
 - Plugins
   - Setting up and using Plugin Manager
+    - Can provide a HTTP proxy if needed
+    - Can specify alternate update center URL for JSON
+    - Listed installed plugins
+    - Can install/upgrade/uninstall plugin
+    - Can unpin plugin so doesn’t use specific version of plugin 
   - Finding and configuring required plugins
+    - Updates tab – for upgrading plugin already have
+    - Available tab – for downloading new plugins
+    - Advanced tab – for uploading plugin hpi/jpi file from disk
+    - Configure plugins on Manage Jenkins -> Manage System
 - CI/CD
   - Using Pipeline (formerly known as “Workflow”)
+    - Use DSL to specify jobs to be built
+    - Example: node { stage ‘x’ echo ‘1’ stage ‘y’ echo ‘2’  }
+    - Sample commands:
+      - build 'jeanne-test'
+      - svn - checkout
+      - retry – retry body up to X times
+      - timeout – limit time spent in block
+      - stash/unstash
+      - load – include a Groovy script
+      - parallel – specify two branches to run in parallel and whether to failFast
+    - When run build, see table with column and duration for each stage. Row is build #. Cell color coded for pass/fail. Can see log for each stage.
   - Integrating automated deployment
+    - Have the pipeline itself triggered by SCM
+    - Then the pipeline triggers the commit job first followed by the rest of the jobs in the pipeline
+    - The docker variable can be used as a build step in the pipeline or to surround other lines
   - Release management process
+    - Not sure what this refers to. Gates/approvals?
   - Pipeline stage behavior
+    - Stages run one at a time unless specify parallel
+    - A subsequent stage only runs if the prior one was successful
 - Jenkins Rest API
-  - Using REST API t  - trigger jobs remotely, access job status, create/delete jobs
-- Security
+  - Using REST API to trigger jobs remotely, access job status, create/delete jobs
+    - /api shows docs for the REST API at that level of the object model
+    - /api/xml, /api/json, /api/json?pretty=true, /api/python and /api/python?pretty-true
+    - Choose “trigger builds remotely” on build and set token to allow POST call. 
+      - run build: POST to JENKINS_URL/job/job-name/build?token=MY_TOKEN
+      - Run build with reason: POST to JENKINS_URL/job/job-name/build?token=MY_TOKEN&cause=xyz
+      - Run Parameterized Build: POST to JENKINS_URL/job/job-name/buildWithParameters?token=MY_TOKEN&param=xyz
+    - Error handling:
+      - If try to call /build for parameterized job, get a 400 error
+      - If try to call with wrong token, get a 403 error
+      - If don’t choose “trigger builds remotely”, it worked
+    - CSRF
+      - Get token at JENKINS_URL/crumbIssuer/api/xml 
+      - Pass .crumb as header with POST
+    - All job (at top level) latest status:  JENKINS_URL/api/xml
+    - Build numbers and urls for a job: JENKINS_URL/job/jobName/api/xml
+    - Build result and details: JENKINS_URL/job/jobName/buildNumber/api/xml
+    - Create job: POST to JENKINS_URL/createItem?name=jobName and post config.xml
+    - Delete job: POST to JENKINS_URL/job/jobName/doDelete
+    - Enable job: POST to JENKINS_URL/job/jobName/enable
+    - Disable job: POST to JENKINS_URL/job/jobName/disable
+- Security ★　今ここ
   - Setting up and using security realms
   - User database, project security, Matrix security
   - Setting up and using auditing
