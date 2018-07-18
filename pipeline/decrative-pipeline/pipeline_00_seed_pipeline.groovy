@@ -26,7 +26,9 @@ pipeline {
                         'jobdsl/pipelineJob/pipeline_12_input_request.groovy',
                         'jobdsl/pipelineJob/pipeline_13_conditional_run_stage.groovy',
                         'jobdsl/pipelineJob/pipeline_14_run_ansible.groovy',
-                        'jobdsl/pipelineJob/pipeline_15_use_shared_library.groovy'
+                        'jobdsl/pipelineJob/pipeline_15_use_shared_library.groovy',
+                        'jobdsl/pipelineJob/pipeline_16_use_global_variables.groovy',
+                        'jobdsl/pipelineJob/pipeline_17_nested_stage.groovy'
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
