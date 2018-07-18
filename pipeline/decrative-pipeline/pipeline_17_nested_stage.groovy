@@ -13,7 +13,7 @@ dates:
   birth: ""
 """
 
-def datas
+def yamlData
 
 
 pipeline {
@@ -29,21 +29,21 @@ pipeline {
                 stage("1-1 read yaml") {
                     steps {
                         script{
-                            datas = readYaml text: "${SAMPLE_YAML}"
-                            echo "Name is ${datas.name.first} ${datas.name.last}"
-                            echo "Birthday is ${datas.dates.birth}"
+                            yamlData = readYaml text: "${SAMPLE_YAML}"
+                            echo "Name is ${yamlData.name.first} ${yamlData.name.last}"
+                            echo "Birthday is ${yamlData.dates.birth}"
                         }
                     }
                 }
                 stage("1-2 write yaml") {
                     steps {
                         script {
-                            datas.name.first = "Ichiro"
-                            datas.name.last = "Sato"
-                            datas.dates.birth = "1980-01-01"
-                            echo "Name is ${datas.name.first} ${datas.name.last}"
-                            echo "Birthday is ${datas.dates.birth}"
-                            writeYaml file: fileName, data: datas
+                            yamlData.name.first = "Ichiro"
+                            yamlData.name.last = "Sato"
+                            yamlData.dates.birth = "1980-01-01"
+                            echo "Name is ${yamlData.name.first} ${yamlData.name.last}"
+                            echo "Birthday is ${yamlData.dates.birth}"
+                            writeYaml file: fileName, data: yamlData
                         }
                     }
                 }
