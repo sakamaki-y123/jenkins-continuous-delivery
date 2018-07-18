@@ -323,73 +323,194 @@ tests
     - Delete job: POST to JENKINS_URL/job/jobName/doDelete
     - Enable job: POST to JENKINS_URL/job/jobName/enable
     - Disable job: POST to JENKINS_URL/job/jobName/disable
-- Security ★　今ここ
+- Security 
   - Setting up and using security realms
+    - Choices include Servlet Container, Google SSO, OpenId, Jenkins user database, LDAP, UNIX group/user database, JCOC SSO
   - User database, project security, Matrix security
+    - People link shows user list + committers
+    - Matrix based security – control privileges granularly using user ids/groups
+    - Project based matrix authorization security – Matrix based + set privileges on job configuration page as well
+    - Role based matrix authorization security – Manage Roles to control permissions by group. Adds groups/roles tabs to projects
   - Setting up and using auditing
+    - Manage Jenkins > System Log – for logging
+    - Job Configuration History plugin – for job config
+    - Audit Trail plugin – for Jenkins config
   - Setting up and using credentials
+    - Domain – URL, host etc
+    - Credentials – username/password, cert, etc
+    - Use by choosing from pull down in job
 - Fingerprints
   - Fingerprinting jobs shared or copied between jobs
+    - Used to determine if a dependency has changed
+    - See which projects use a dependency
+    - See where fingerprinted files came from
 - Artifacts
   - Copying artifacts
+    - Build step to copy artifacts from another build
+    - Can choose which ones want to include/exclude by pattern
   - Using artifacts in Jenkins
+    - Can refer to artifacts after build
+    - Treated specially not just as part of workspace
   - Artifact retention policy
+    - By default, kept same length of time as build log.
+    - Can keep less time to save disk space
 - Alerts
   - Making basic updates t  - jobs and build scripts
+    - Not sure what they mean here
   - Troubleshooting specific problems from build and test failure alerts
+    - Not sure what they mean here
 
 ## 3. Building Continuous Delivery (CD) Pipelines
 - Pipeline Concepts
   - Value stream mapping for CD pipelines
+    - Entire process from concept to cash for a product
+    - Includes non code aspects such as product discovery
+    - Shows where time goes in process and where 
+    - CD pipeline is subset of value stream map
   - Why create a pipeline?
+    - Automated manifestation of process for getting software from version control to users
+    - Allows for phases of increasing fitness
   - Gates within a CD pipeline
-  - How t  - protect centralized pipelines when multiple groups use same tools
+    - Provide a point for approval before continuing.
+  - How to protect centralized pipelines when multiple groups use same tools
+    - Not sure what this means. Approvals? Security?
   - Definition of binary reuse, automated deployment, multiple environments
+    - Binary reuse – Use other components as packaged, artifacts that have passed success criteria
+    - Automated deployment – using the same script to deploy to every environment
+    - Multiple environments – resources/configuration needed to work: ex: test, QA, Prod
   - Elements of your ideal CI/CD pipeline - tools
-  - Key concepts in building scripts (including security/password, environment
-information, etc.)
+    - Source control repository
+    - Binary repository
+    - Automated testing
+    - Capacity testing
+    - Deployment
+  - Key concepts in building scripts (including security/password, environment information, etc.)
+    - Credentials plugin for password
+    - Keep environment information in source control
+    - Different script for each stage in the pipeline
 - Upstream and downstream
   - Triggering jobs from other jobs
+    - Build other projects 
+      - Comma separated list of jobs
+      - an specify to trigger only on good builds, good builds + unstable builds and always (even on failure)
+    - Trigger parameterized build on other projects
+      - Comma separated list of jobs
+      - Can control based on success, unstable, failure only, aborted, etc
+      - Can set up multiple triggers so each set has different rules on when to run
+      - Parameter types include boolean, string, from a property file, current build parameters, etc
+      - Can pass through information like slave or Git/SVN trigger info
+    - All jobs share same trigger
   - Setting up the Parameterized Trigger plugin
+    - Check “This build is parameterized” and setup parameters
+    - Can use Node to specify slave by name from select list or label to specify slave’s build label
   - Upstream/downstream jobs
+    - If A depends on B, B is the upstream job
 - Triggering
   - Triggering Jenkins on code changes
+    - For a commit build
   - Difference between push and pull
-  - When t  - use push vs pull
+    - Pull - Set up a SCM polling trigger 
+    - Push – Set up a hook from the repository to trigger job
+  - When to use push vs pull
+    - Pull for when you don’t control the repository or polling is ok
+    - Push for when you need an immediate build or don’t want to waste resources on polling
 - Pipeline (formerly known as “Workflow”)
   - Benefits of Pipeline vs linked jobs
+    - Scripted – can code loops/conditionals
+    - Resilient – can survive Jenkins restarts
+    - Pausable – can get manual approval
+    - Efficient – can restart from checkpoints
+    - Visualized – can see in dashboard
   - Functionalities offered by Pipeline
-  - How t  - use Pipeline
+    - Build steps, pauses, parallelization, deploy, stash/unstash, etc
+    - Can run on certain node with node(‘master’) {}
+    - Can prompt user with input ‘query’
+    - Can do anything Groovy can do
+    - Can create stages
+  - How to use Pipeline
+    - Put commands want to run inside node{}
+    - Use snippet generated or write groovy script
+    - Can store global libraries in git at git clone <Jenkins>/workflowLibs.git
   - Pipeline stage view [new]
-- Folders
-  - How t  - control access t  - items in Jenkins with folders
+    - Visualise pipeline stage
+      - A pipeline automatically creates a stage view – can click to see “Full Stage View”
+- Folders 
+  - How to control access to items in Jenkins with folders
+    - Role Based Access Control can control folder
+    - Can control level as current/child/grandchild
   - Referencing jobs in folders
+    - <jenkinsHome>/job/folder/job/name
 - Parameters
   - Setting up test automation in Jenkins against an uploaded executable
+    - File parameter in parameterized job
+    - Prompted to upload it when running manually
   - Passing parameters between jobs
-  - Identifying parameters and how t  - use them: file parameter, string parameter
+      - Can type parameters, use property file, etc
+  - Identifying parameters and how to use them: file parameter, string parameter
+    - String parameter referred to by variable name ${TEST}
+    - File parameter placed in the workspace in the parameter name
   - Jenkins CLI parameters
+    - Download jar from <Jenkins>/jnlpJars/jenkins-cli.jar
+    - Run as java –jar Jenkins-cli.jar –s <jenkinsUrl> help
+    - Add –noKeyAuth if don’t want to use SSH key
 - Promotions
   - Promotion of a job
+    - Can run steps after a gate
+    - Ex: archive artifacts, deploy, etc
   - Why promote jobs?
-  - How t  - use the Promoted Builds plugin
+    - Way of communicating a build is good
+  - How o use the Promoted Builds plugin
+    - Promote Builds plugins lets you specify actions that require approval
+    - Adds promotion status link when check “Promote builds when…”
+    - Approvals include manually, automatically, based on downstream/upstream builds
+    - Can run multiple build steps (or post build actions) to run after approval – retry-able independently. Like a separate build.
+    - See icon once approved or if steps after approval fail
+    - Can have multiple promotion processes
 - Notifications
-  - How t  - radiate information on CD pipelines t  - teams
+  - How to radiate information on CD pipelines to teams
+    - Email , radiator, etc
 - Pipeline Multibranch and Repository Scanning [new]
   - Usage of Multibranch jobs
   - Scanning GitHub and BitBucket Organization
   - Scanning basic SCM repositories
 - Pipeline Global Libraries [new]
-  - How t  - share code across Pipelines
+  - How to share code across Pipelines
+    - use shared library
   - Usages of the Shared Libraries
+    - setting > system config > Global Pipeline Libraries
+    - add git repository
   - Interaction with Folders and Repository scanning
   - Security and Groovy sandbox
+    - if using not permitted methoad, occur RejectedAccessException
+    - https://jenkins.io/doc/book/managing/script-approval/
 
 ## 4. CD-as-Code Best Practices
 - Distributed builds architecture
+  - Run jobs on slave
+  - More secure because jobs run on slave
+  - More scalable because can add slaves
+  - Vertical growth – master is responsible for more jobs
+  - Horizontal growth – creation of more masters
+  - Recommend to virtualize slaves, but not master for performance
 - Fungible (replaceable) agents
+  - Can configure third party tools to automatically install on slaves
+  - Best practice is to make slaves interchangeable, but can tie jobs to slaves
 - Master-agent connectors and protocol
+  - SSH connector – preferred option. Slaves need SSHD server and public/private key
+  - JNLP/TCP connector – Java Network Launch Protocol start web agent on slave through JWS (Java Web Start). Can start via browser or OS service
+  - JNLP/HTTP connector – like JNLP/TCP except headless and over HTTP
+  - Custom script – launch via command line
 - Tool installations on agents
+  - Can install manually or have Jenkins do it
 - Cloud agents
+  - EC2 for Amazon Cloud
+  - JCloud – for other clouds
+- Containerization
+  - Docker image to deploy/run application
+  - “Build inside a Docker Container” option
 - Traceability
+  - Docker Traceability plugin uses fingerprints for images
 - High availability
+  - Master must be on network attached storage device
+  - Don’t do builds on master or at least not with workspace under JENKINS_HOME
+  - HAProxy serves as the reverse proxy
