@@ -28,7 +28,8 @@ pipeline {
                         'jobdsl/pipelineJob/pipeline_14_run_ansible.groovy',
                         'jobdsl/pipelineJob/pipeline_15_use_shared_library.groovy',
                         'jobdsl/pipelineJob/pipeline_16_use_global_variables.groovy',
-                        'jobdsl/pipelineJob/pipeline_17_nested_stage.groovy'
+                        'jobdsl/pipelineJob/pipeline_17_nested_stage.groovy',
+                        'jobdsl/pipelineJob/pipeline_18_matrix_build'
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
