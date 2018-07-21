@@ -61,7 +61,7 @@
   - Scope of jobs
     - Not sure what this means – Maybe that there is a long running job type?
 - Builds
-  - What are builds in Jenkins?
+  - What are builds in Jenkins?  
   https://wiki.jenkins.io/display/JENKINS/Building+a+software+project
     - Build – Result of one run of a job/project
   - What are build steps, triggers, artifacts, and repositories?
@@ -104,6 +104,7 @@ tests
 - Notifications
   - Types of notifications in Jenkins
     - Failure, second failure, success, etc
+      - What is second failure ? 
     - Active/push – radiators/SMS vs passive/pull – rss/dashboard
     - RSS - /rssAll, /rssFailed and rssLatest
     - Radiator view plugin uses the entire screen
@@ -158,7 +159,10 @@ tests
     - Can install automatically or from file system
 - Installation Wizard [new] ★---
   - What is the Jenkins Installation Wizard?
+    - Jenkins has locked when first access after jenkins setup.
+    - initial admin pass word placed in `/var/jenkins_home/secrets/initialAdminPassword`
   - How to use the Wizard?
+    - Install suggested plugins or select plugins.
   - Which configurations are covered by the Installation Wizard?
 
 ---
@@ -173,7 +177,7 @@ tests
     - Run directly with “Build with Parameters” or call from upstream job with “trigger parameterized build” post build action and passing parameters
   - Usage of Freestyle/Pipeline/Matrix jobs
     - Freestyle – most flexible job
-    - ipeline – enter code in DSL. There is a snippet generator which generates the Groovy for common operations and lists the available environment variables.
+    - pipeline – enter code in DSL. There is a snippet generator which generates the Groovy for common operations and lists the available environment variables.
     - Matrix (multi-config) – Specify a configuration matrix with one or more dimensions. Runs all combinations when build.
       - Axis: slave, label (for slave) or user defined (string)
       - Combination filter: if don’t want cross product of all axis to run
@@ -215,7 +219,7 @@ tests
     - Required URL
     - Optional credentials
     - Options vary by repo. Ex: SVN lets you specify infinity/immediates/etc as checkout depth. Git lets you specify a branch specifier
-    - Options vary by repo. Ex: SVN lets you specify infinity/immediates/etc as checkout depth. Git lets you specify a branch specifier
+fier
   - Creating hooks
     - Hook script in repository triggers job
     - Ex: Github plugin provides hook
