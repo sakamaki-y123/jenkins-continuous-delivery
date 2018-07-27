@@ -518,3 +518,7 @@ fier
   - Master must be on network attached storage device
   - Don’t do builds on master or at least not with workspace under JENKINS_HOME
   - HAProxy serves as the reverse proxy
+
+# certified-jenkins-engineer-cje-2017-objective-sample
+
+https://rafishaikblog.wordpress.com/2017/06/08/certified-jenkins-engineer-cje-2017-objective-sample/
