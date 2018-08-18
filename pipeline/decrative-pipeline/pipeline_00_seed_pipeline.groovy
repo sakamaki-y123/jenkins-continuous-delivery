@@ -29,7 +29,8 @@ pipeline {
                         'jobdsl/pipelineJob/pipeline_15_use_shared_library.groovy',
                         'jobdsl/pipelineJob/pipeline_16_use_global_variables.groovy',
                         'jobdsl/pipelineJob/pipeline_17_nested_stage.groovy',
-                        'jobdsl/pipelineJob/pipeline_18_matrix_build.groovy'
+                        'jobdsl/pipelineJob/pipeline_18_matrix_build.groovy',
+                        'jobdsl/pipelineJob/pipeline_19_random_kitten_generator.groovy',
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
