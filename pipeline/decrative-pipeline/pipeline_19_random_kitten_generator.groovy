@@ -19,7 +19,7 @@ pipeline {
                 script{
                     def slackMessage ="""
                     |@here
-                    |今日のにゃんこです。
+                    |今日のにゃんこだよ:cat2:
                     |${BUILD_URL}artifact/${kittenImage}
                     """
                     withCredentials(
