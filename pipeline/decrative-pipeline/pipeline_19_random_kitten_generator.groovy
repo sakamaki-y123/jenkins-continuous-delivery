@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('get random kitten image') {
             steps {
-                sh "curl --fail -o ${kittenImage} http://www.randomkittengenerator.com/cats/rotator.jpg"
+                sh "curl --fail -o ${kittenImage} http://www.randomkittengenerator.com/cats/rotator.php"
                 archiveArtifacts "${kittenImage}"
             }
         }
