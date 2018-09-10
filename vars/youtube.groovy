@@ -54,7 +54,7 @@ def getVideoInfo(videoId){
     }
 }
 
-def getVideoInfos(videoIds){
+def getVideoInfoList(videoIds){
     def videoInfos =[]
     for(videoId in videoIds){
         videoInfos << getVideoInfo(videoId)       
@@ -87,7 +87,7 @@ def getSearchVideoInfo(searchWord,part = "snippet", type = "video", maxResults =
     }
 }
 
-def getSearchVideoInfos(searchWords){
+def getSearchVideoInfoList(searchWords){
     def searchVideoInfos =[]
     for(searchWord in searchWords){
         searchVideoInfos << getSearchVideoInfo(searchWord)
