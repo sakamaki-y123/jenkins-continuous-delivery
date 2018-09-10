@@ -55,11 +55,11 @@ def getVideoInfo(videoId){
 }
 
 def getVideoInfoList(videoIds){
-    def videoInfos =[]
+    def videoInfoList =[]
     for(videoId in videoIds){
-        videoInfos << getVideoInfo(videoId)       
+        videoInfoList << getVideoInfo(videoId)       
     }
-    return videoInfos
+    return videoInfoList
 }
 
 def getSearchVideoInfo(searchWord,part = "snippet", type = "video", maxResults = 2, order = "viewCount" ,publishedDaysAgo = 7){
@@ -88,9 +88,9 @@ def getSearchVideoInfo(searchWord,part = "snippet", type = "video", maxResults =
 }
 
 def getSearchVideoInfoList(searchWords){
-    def searchVideoInfos =[]
+    def searchVideoInfoList =[]
     for(searchWord in searchWords){
-        searchVideoInfos << getSearchVideoInfo(searchWord)
+        searchVideoInfoList << getSearchVideoInfo(searchWord)
     }
-    return searchVideoInfos
+    return searchVideoInfoList
 }
