@@ -117,7 +117,7 @@ def uploadVideo(title,videoPath){
                 params.add("--credentials-file=${CREDENTIAL_FILE}")
                 params.add("--client-secrets=${CLIENT_SECRET_FILE}")
                 def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
-                def videoId = sh( returnStdout: true, script: cmd).trim()
+                videoId = sh( returnStdout: true, script: cmd).trim()
             }
         }        
     }
