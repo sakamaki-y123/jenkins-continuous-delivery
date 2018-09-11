@@ -101,8 +101,8 @@ def uploadVideo(title,videoPath){
         string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
     ]) {
         withCredentials([
-            file(credentialsId: 'youtube_upload_credential', variable: 'credentials.json'),
-            file(credentialsId: 'youtube_upload_client_secret', variable: 'client_secrets.json')
+            file(credentialsId: 'youtube_upload_credential', variable: 'CREDENTIAL_FILE'),
+            file(credentialsId: 'youtube_upload_client_secret', variable: 'CLIENT_SECRET_FILE')
         ]) {
             sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
             unzip dir: '', glob: '', zipFile: 'master.zip'
@@ -114,8 +114,8 @@ def uploadVideo(title,videoPath){
                 params.add("--title=${title}")
                 params.add("--default-language=ja")
                 params.add("--default-audio-language=ja")                         
-                params.add("--client-secrets=client_secrets.json")
-                params.add("--credentials-file=credentials.json")
+                params.add("--credentials-file=${CREDENTIAL_FILE}")
+                params.add("--client-secrets=${CLIENT_SECRET_FILE}")
                 def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
                 def result = sh( returnStdout: true, script: cmd).trim()
                 echo result
