@@ -94,3 +94,32 @@ def getSearchVideoInfoList(searchWords){
     }
     return searchVideoInfoList
 }
+
+def uploadVideo(title,videoPath){
+    def videoId = ""
+    withCredentials([
+        string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
+    ]) {
+        withCredentials([
+            file(credentialsId: 'youtube_upload_credential', variable: 'CREDENTIAL_FILE'),
+            file(credentialsId: 'youtube_upload_client_secret', variable: 'CLIENT_SECRET_FILE')
+        ]) {
+            sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
+            unzip dir: '', glob: '', zipFile: 'master.zip'
+            withDockerContainer(args: '-u 0', image: 'python') {
+                sh "pip install --upgrade httplib2 oauth2client rsa uritemplate"
+                sh "pip install --upgrade google-api-python-client progressbar2"
+                sh "cd youtube-upload-master ; python setup.py install"
+                def params = []
+                params.add("--title=${title}")
+                params.add("--default-language=ja")
+                params.add("--default-audio-language=ja")                         
+                params.add("--credentials-file=${CREDENTIAL_FILE}")
+                params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+                def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
+                videoId = sh( returnStdout: true, script: cmd).trim()
+            }
+        }        
+    }
+    return videoId
+}
