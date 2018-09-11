@@ -16,7 +16,7 @@ pipelineJob(jobName) {
     }
 	parameters {
 		stringParam("question", "", "youtubeの検索条件を指定する")
-		stringParam("maxResults", 5, "検索結果の取得数 1~50")
+		stringParam("maxResults", "5", "検索結果の取得数 1-50")
 		choiceParam("videoDuration", ["any", "long", "medium", "short"], "videoDuration パラメータは、動画の検索結果を期間に基づいてフィルタリングします。")
 		stringParam("publishedAfter", "2018-08-25T00:00:00Z", "いつ以降のものを取得するか")
 	}
