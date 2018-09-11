@@ -1,4 +1,8 @@
 def translate(text){
+    if(text.isEmpty()){
+        return text
+    }
+
     withCredentials(
         [usernamePassword(
             credentialsId: 'amazon-translator-access-key',
