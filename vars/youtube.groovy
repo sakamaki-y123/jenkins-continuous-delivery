@@ -96,7 +96,7 @@ def getSearchVideoInfoList(searchWords){
 }
 
 def uploadVideo(title,videoPath){
-    def videoURL = ""
+    def videoId = ""
     withCredentials([
         string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
     ]) {
@@ -117,15 +117,9 @@ def uploadVideo(title,videoPath){
                 params.add("--credentials-file=${CREDENTIAL_FILE}")
                 params.add("--client-secrets=${CLIENT_SECRET_FILE}")
                 def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
-                def result = sh( returnStdout: true, script: cmd).trim()
-                echo result
-                for (line in result.split("\n")){
-                    if(line.trim().startsWith("Video URL:")){
-                        videoURL = line.replaceAll('Video URL:','').trim()
-                    }
-                }
+                def videoId = sh( returnStdout: true, script: cmd).trim()
             }
         }        
     }
-    return videoURL
+    return videoId
 }
