@@ -94,3 +94,38 @@ def getSearchVideoInfoList(searchWords){
     }
     return searchVideoInfoList
 }
+
+def uploadVideo(title,videoPath){
+    def videoURL = ""
+    withCredentials([
+        string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
+    ]) {
+        withCredentials([
+            file(credentialsId: 'youtube_upload_credential', variable: 'credentials.json'),
+            file(credentialsId: 'youtube_upload_client_secret', variable: 'client_secrets.json')
+        ]) {
+            sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
+            unzip dir: '', glob: '', zipFile: 'master.zip'
+            withDockerContainer(args: '-u 0', image: 'python') {
+                sh "pip install --upgrade httplib2 oauth2client rsa uritemplate"
+                sh "pip install --upgrade google-api-python-client progressbar2"
+                sh "cd youtube-upload-master ; python setup.py install"
+                def params = []
+                params.add("--title=${title}")
+                params.add("--default-language=ja")
+                params.add("--default-audio-language=ja")                         
+                params.add("--client-secrets=client_secrets.json")
+                params.add("--credentials-file=credentials.json")
+                def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
+                def result = sh( returnStdout: true, script: cmd).trim()
+                echo result
+                for (line in result.split("\n")){
+                    if(line.trim().startsWith("Video URL:")){
+                        videoURL = line.replaceAll('Video URL:','').trim()
+                    }
+                }
+            }
+        }        
+    }
+    return videoURL
+}
