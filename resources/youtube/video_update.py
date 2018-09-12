@@ -121,4 +121,4 @@ if __name__ == "__main__":
   except HttpError, e:
     print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
   else:
-    print "Tag '%s' was added to video id '%s'." % (args.tag, args.video_id)
+    print "Video was updated to video id '%s'." % (args.video_id)
