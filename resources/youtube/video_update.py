@@ -73,7 +73,7 @@ def update_video(youtube, options):
   # If the response does not contain an array of "items" then the video was
   # not found.
   if not videos_list_response["items"]:
-    print ("Video '%s' was not found." % options.video_id)
+    print("Video '%s' was not found." % options.video_id)
     sys.exit(1)
 
   # Since the request specified a video ID, the response only contains one
@@ -119,6 +119,6 @@ if __name__ == "__main__":
   try:
     update_video(youtube, args)
   except HttpError, e:
-    print "An HTTP error %d occurred:\n%s" % (e.resp.status, e.content)
+    print("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
   else:
-    print "Tag '%s' was added to video id '%s'." % (args.tag, args.video_id)
+    print("Tag '%s' was added to video id '%s'." % (args.tag, args.video_id))
