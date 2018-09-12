@@ -138,7 +138,7 @@ def updateVideo(videoId,title,discriptionFile,categoryId,tag){
             withDockerContainer(args: '-u 0', image: 'python') {
                 sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
                 def params = []
-                params.add("--video-id=${title}")
+                params.add("--video-id=${videoId}")
                 params.add("--title=${title}")
                 params.add("--description-file=${discriptionFile}")
                 params.add("--category-id=${categoryId}")
