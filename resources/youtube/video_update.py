@@ -73,7 +73,7 @@ def update_video(youtube, options):
   # If the response does not contain an array of "items" then the video was
   # not found.
   if not videos_list_response["items"]:
-    print ("Video '%s' was not found." % options.video_id)
+    print "Video '%s' was not found." % options.video_id
     sys.exit(1)
 
   # Since the request specified a video ID, the response only contains one
