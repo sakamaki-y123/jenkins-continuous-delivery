@@ -119,6 +119,6 @@ if __name__ == "__main__":
   try:
     update_video(youtube, args)
   except HttpError, e:
-    print ("An HTTP error %d occurred:\n%s" % (e.resp.status, e.content))
+    print ("An HTTP error %d occurred:\n%s") % (e.resp.status, e.content)
   else:
-    print ("Tag '%s' was added to video id '%s'." % (args.tag, args.video_id))
+    print ("Tag '%s' was added to video id '%s'.") % (args.tag, args.video_id)
