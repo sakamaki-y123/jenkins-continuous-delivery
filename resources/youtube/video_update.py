@@ -80,8 +80,8 @@ def update_video(youtube, options):
   # video resource. This code extracts the snippet from that resource.
   videos_list_snippet = videos_list_response["items"][0]["snippet"]
 
-  videos_list_snippet.title = options.title
-  videos_list_snippet.description = options.description
+  videos_list_snippet["title"] = options.title
+  videos_list_snippet["description"] = options.description
 
   # Preserve any tags already associated with the video. If the video does
   # not have any tags, create a new array. Append the provided tag to the
@@ -91,7 +91,7 @@ def update_video(youtube, options):
   videos_list_snippet["tags"].append(options.tag)
 
   if options.category_id != "":
-    videos_list_snippet.category_id = options.category_id
+    videos_list_snippet["category_id"] = options.category_id
 
   # Update the video resource by calling the videos.update() method.
   videos_update_response = youtube.videos().update(
