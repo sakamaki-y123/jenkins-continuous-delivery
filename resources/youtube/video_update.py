@@ -112,7 +112,7 @@ if __name__ == "__main__":
   argparser.add_argument("--credentials-file", default=".youtube-upload-credentials.json", help="Credentials JSON file")
   args = argparser.parse_args()
   if args.description_file is not None and os.path.exists(args.description_file):
-      with open(args.description_file, encoding="utf-8") as file:
+      with open(args.description_file, "r") as file:
           args.description = file.read()
 
   youtube = get_authenticated_service(args)
