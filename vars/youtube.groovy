@@ -124,7 +124,7 @@ def uploadVideo(title,videoPath){
     return videoId
 }
 
-def updateVideo(videoId,title,discriptionFile,categoryId,tag){
+def updateVideo(videoId,title,descriptionFile,categoryId,tag){
     def result = ""
     withCredentials([
         string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
@@ -140,7 +140,7 @@ def updateVideo(videoId,title,discriptionFile,categoryId,tag){
                 def params = []
                 params.add("--video-id=${videoId}")
                 params.add("--title=${title}")
-                params.add("--description-file=${discriptionFile}")
+                params.add("--description-file=${descriptionFile}")
                 params.add("--category-id=${categoryId}")
                 params.add("--tag=${tag}")
                 params.add("--credentials-file=${CREDENTIAL_FILE}")
