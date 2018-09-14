@@ -95,14 +95,14 @@ def getSearchVideoInfoList(searchWords){
     return searchVideoInfoList
 }
 
-def uploadVideo(title,videoPath){
+def uploadVideo(title,videoPath,uploadCredentialId = 'youtube_upload_credential',uploadClientSecretId = 'youtube_upload_client_secret'){
     def videoId = ""
     withCredentials([
         string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
     ]) {
         withCredentials([
-            file(credentialsId: 'youtube_upload_credential', variable: 'CREDENTIAL_FILE'),
-            file(credentialsId: 'youtube_upload_client_secret', variable: 'CLIENT_SECRET_FILE')
+            file(credentialsId: "${uploadCredentialId}", variable: 'CREDENTIAL_FILE'),
+            file(credentialsId: "${uploadClientSecretId}", variable: 'CLIENT_SECRET_FILE')
         ]) {
             sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
             unzip dir: '', glob: '', zipFile: 'master.zip'
@@ -124,14 +124,14 @@ def uploadVideo(title,videoPath){
     return videoId
 }
 
-def updateVideo(videoId,title,descriptionFile,categoryId,tag){
+def updateVideo(videoId,title,descriptionFile,categoryId,tag,uploadCredentialId = 'youtube_upload_credential',uploadClientSecretId = 'youtube_upload_client_secret'){
     def result = ""
     withCredentials([
         string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
     ]) {
         withCredentials([
-            file(credentialsId: 'youtube_upload_credential', variable: 'CREDENTIAL_FILE'),
-            file(credentialsId: 'youtube_upload_client_secret', variable: 'CLIENT_SECRET_FILE')
+            file(credentialsId: "${uploadCredentialId}", variable: 'CREDENTIAL_FILE'),
+            file(credentialsId: "${uploadClientSecretId}", variable: 'CLIENT_SECRET_FILE')
         ]) {
             script = libraryResource 'youtube/video_update.py'
             writeFile file: "video_update.py",text: script
