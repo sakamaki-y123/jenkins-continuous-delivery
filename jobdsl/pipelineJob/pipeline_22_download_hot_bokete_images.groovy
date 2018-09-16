@@ -1,14 +1,17 @@
 def folderPath = "${FOLDER_PATH}"
 def jobName = "${FOLDER_PATH}" + "/" + "22_download_hot_bokete_images"
-def jobDescription = "download hot bokete images"
+def jobDescription = """
+22_download_hot_bokete_images
+boketeのホットな画像を30枚ダウンロードします。
+"""
 
 pipelineJob(jobName) {
 	description(jobDescription)
-	keepDependencies(false)
-    logRotator {
+	logRotator {
         numToKeep(5)
         artifactNumToKeep(5)
     }
+	keepDependencies(false)
 	definition {
 		cpsScm {
 			scm {

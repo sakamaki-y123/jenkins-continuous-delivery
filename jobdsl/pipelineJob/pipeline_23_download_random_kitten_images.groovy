@@ -1,14 +1,17 @@
 def folderPath = "${FOLDER_PATH}"
 def jobName = "${FOLDER_PATH}" + "/" + "23_download_random_kitten_images"
-def jobDescription = "download 30 randome kitten images"
+def jobDescription = """
+23_download_random_kitten_images
+unsplash api を使って、猫の画像を取得します。
+"""
 
 pipelineJob(jobName) {
 	description(jobDescription)
-	keepDependencies(false)
-    logRotator {
+	logRotator {
         numToKeep(5)
         artifactNumToKeep(5)
     }
+	keepDependencies(false)
 	definition {
 		cpsScm {
 			scm {

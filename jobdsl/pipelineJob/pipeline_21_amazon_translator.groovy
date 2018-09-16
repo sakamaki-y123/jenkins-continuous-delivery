@@ -4,8 +4,7 @@ def jobDescription = "trancelate language by amazon translator"
 
 pipelineJob(jobName) {
 	description(jobDescription)
-	keepDependencies(false)
-    logRotator {
+	logRotator {
         numToKeep(5)
         artifactNumToKeep(5)
     }
@@ -14,6 +13,7 @@ pipelineJob(jobName) {
 		stringParam("SOURCE_LANGUAGE_CODE", "ja", "")
 		stringParam("TARGET_LANGUAGE_CODE", "en", "")
 	}
+	keepDependencies(false)
 	definition {
 		cpsScm {
 			scm {

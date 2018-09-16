@@ -31,6 +31,10 @@ pipeline {
                         'jobdsl/pipelineJob/pipeline_17_nested_stage.groovy',
                         'jobdsl/pipelineJob/pipeline_18_matrix_build.groovy',
                         'jobdsl/pipelineJob/pipeline_19_random_kitten_generator.groovy',
+                        'jobdsl/pipelineJob/pipeline_20_search_youtube_video.groovy',
+                        'jobdsl/pipelineJob/pipeline_21_amazon_translator.groovy',
+                        'jobdsl/pipelineJob/pipeline_22_download_hot_bokete_images.groovy',
+                        'jobdsl/pipelineJob/pipeline_23_download_random_kitten_images.groovy',
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
