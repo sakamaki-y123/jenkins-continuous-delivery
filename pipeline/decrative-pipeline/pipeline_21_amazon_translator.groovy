@@ -24,8 +24,8 @@ pipeline {
                         ]) {
                             def jsonmap = [:]
                             jsonmap.Text = "${TRANCELATE_TEXT}"
-                            jsonmap.SourceLanguageCode = "ja"
-                            jsonmap.TargetLanguageCode = "en"
+                            jsonmap.SourceLanguageCode = "${SOURCE_LANGUAGE_CODE}"
+                            jsonmap.TargetLanguageCode = "${TARGET_LANGUAGE_CODE}"
                             def translateData = readJSON text: groovy.json.JsonOutput.toJson(jsonmap)
                             writeJSON file: 'translate.json', json: translateData
                             sh 'aws translate translate-text --cli-input-json file://${WORKSPACE}/translate.json > translated.json'

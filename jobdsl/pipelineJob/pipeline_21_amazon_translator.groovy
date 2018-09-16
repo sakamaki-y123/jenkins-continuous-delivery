@@ -1,10 +1,6 @@
 def folderPath = "${FOLDER_PATH}"
 def jobName = "${FOLDER_PATH}" + "/" + "21_amazon_translator"
-def jobDescription = """
-21_amazon_translator
-
-日本語を英語に変換するジョブです。
-"""
+def jobDescription = "trancelate language by amazon translator"
 
 pipelineJob(jobName) {
 	description(jobDescription)
@@ -14,6 +10,8 @@ pipelineJob(jobName) {
     }
 	parameters {
 		textParam("TRANCELATE_TEXT", "", "")
+		stringParam("SOURCE_LANGUAGE_CODE", "ja", "")
+		stringParam("TARGET_LANGUAGE_CODE", "en", "")
 	}
 	keepDependencies(false)
 	definition {
