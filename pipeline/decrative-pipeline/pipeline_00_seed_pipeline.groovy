@@ -35,6 +35,7 @@ pipeline {
                         'jobdsl/pipelineJob/pipeline_21_amazon_translator.groovy',
                         'jobdsl/pipelineJob/pipeline_22_download_hot_bokete_images.groovy',
                         'jobdsl/pipelineJob/pipeline_23_download_random_kitten_images.groovy',
+                        'jobdsl/pipelineJob/pipeline_24_download_beautiful_landscape-video.groovy',
                     ].join('\n'),
                     additionalParameters: [
                         FOLDER_PATH: "${FOLDER_PATH}",
