@@ -1,13 +1,13 @@
 def folderPath = "${FOLDER_PATH}"
-def jobName = "${FOLDER_PATH}" + "/" + "19_random_kitten_generator"
-def jobDescription = "create randome kitten image and slack channel."
+def jobName = "${FOLDER_PATH}" + "/" + "22_download_hot_bokete_images"
+def jobDescription = "download hot bokete images"
 
 pipelineJob(jobName) {
 	description(jobDescription)
 	keepDependencies(false)
-	logRotator {
-		daysToKeep(30)
-		artifactDaysToKeep(30)
+    logRotator {
+        numToKeep(5)
+        artifactNumToKeep(5)
     }
 	definition {
 		cpsScm {
@@ -19,7 +19,7 @@ pipelineJob(jobName) {
 					branch("${GIT_HUB_BRANCH}")
 				}
 			}
-			scriptPath("pipeline/decrative-pipeline/pipeline_19_random_kitten_generator.groovy")
+			scriptPath("pipeline/decrative-pipeline/pipeline_22_download_hot_bokete_images.groovy")
 		}
 	}
 	disabled(false)
