@@ -20,7 +20,7 @@ pipelineJob(jobName) {
 					branch("${GIT_HUB_BRANCH}")
 				}
 			}
-			scriptPath("pipeline/decrative-pipeline/pipeline_24_download_beautiful_landscape-video.groovy")
+			scriptPath("pipeline/decrative-pipeline/pipeline_24_download_beautiful_landscape_video.groovy")
 		}
 	}
 	disabled(false)
