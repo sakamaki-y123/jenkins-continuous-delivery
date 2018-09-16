@@ -13,7 +13,7 @@ def searchPhotos(query,page = 1,per_page = 10){
         withEnv([
             "URL=https://api.unsplash.com/search/photos?${urlParams}",
         ]) {
-            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail curl --fail ${URL}')
+            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail ${URL}')
             def urlJson = readJSON text: urlJsonTxt
             for( result in urlJson.results) {
                 def summary = """
@@ -41,7 +41,7 @@ def getRandomPhoto(query, count =1){
         withEnv([
             "URL=https://api.unsplash.com/photos/random?${urlParams}",
         ]) {
-            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail curl --fail ${URL}')
+            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail ${URL}')
             def urlJson = readJSON text: urlJsonTxt
             for( result in urlJson) {
                 def summary = """
@@ -70,7 +70,7 @@ def getListPhotos(page = 1,per_page = 10,order_by = "latest" ){
         withEnv([
             "URL=https://api.unsplash.com/photos?${urlParams}",
         ]) {
-            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail curl --fail ${URL}')
+            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail ${URL}')
             def urlJson = readJSON text: urlJsonTxt
             return urlJson
         }
@@ -89,7 +89,7 @@ def getAPhoto(id){
     withEnv([
         "URL=https://api.unsplash.com/photos/${id}?${urlParams}"
     ]) {
-        def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail curl --fail ${URL}')
+        def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail ${URL}')
         def urlJson = readJSON text: urlJsonTxt
         def summary = """
         |id:${urlJson.id}
@@ -112,7 +112,7 @@ def getDownloadUrl(id){
         withEnv([
             "URL=https://api.unsplash.com/photos/${id}/download?${urlParams}",
         ]) {
-            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail curl --fail ${URL}')
+            def urlJsonTxt = sh( returnStdout: true, script: 'curl --fail ${URL}')
             def urlJson = readJSON text: urlJsonTxt
             return urlJson.url
         }
