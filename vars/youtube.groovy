@@ -95,6 +95,14 @@ def getSearchVideoInfoList(searchWords){
     return searchVideoInfoList
 }
 
+def getSearchVideoInfoList(searchWords,publishedDaysAgo){
+    def searchVideoInfoList =[]
+    for(searchWord in searchWords){
+        searchVideoInfoList << getSearchVideoInfo(searchWord,part = "snippet", type = "video", maxResults = 2, order = "viewCount" ,publishedDaysAgo)
+    }
+    return searchVideoInfoList
+}
+
 def uploadVideo(title,videoPath){
     def videoId = ""
     withCredentials([
