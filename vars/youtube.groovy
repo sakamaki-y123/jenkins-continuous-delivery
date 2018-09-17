@@ -98,7 +98,7 @@ def getSearchVideoInfoList(searchWords){
 def getSearchVideoInfoList(searchWords,publishedDaysAgo){
     def searchVideoInfoList =[]
     for(searchWord in searchWords){
-        searchVideoInfoList << getSearchVideoInfo(searchWord,part = "snippet", type = "video", maxResults = 2, order = "viewCount" ,publishedDaysAgo)
+        searchVideoInfoList << getSearchVideoInfo(searchWord,"snippet","video",2,"viewCount",publishedDaysAgo)
     }
     return searchVideoInfoList
 }
