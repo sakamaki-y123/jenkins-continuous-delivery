@@ -100,6 +100,7 @@ def update_video(youtube, options):
       snippet=videos_list_snippet,
       id=options.video_id
     )).execute()
+  print videos_update_response
 
 if __name__ == "__main__":
   argparser.add_argument("--video-id", help="ID of video to update.", required=True)
