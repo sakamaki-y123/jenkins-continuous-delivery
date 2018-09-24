@@ -103,61 +103,53 @@ def getSearchVideoInfoList(searchWords,publishedDaysAgo){
     return searchVideoInfoList
 }
 
-def uploadVideo(title,videoPath){
+def uploadVideo(title,videoPath,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def videoId = ""
     withCredentials([
-        string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
+        file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
+        file(credentialsId: secretFileId, variable: 'CLIENT_SECRET_FILE')
     ]) {
-        withCredentials([
-            file(credentialsId: 'youtube_upload_credential', variable: 'CREDENTIAL_FILE'),
-            file(credentialsId: 'youtube_upload_client_secret', variable: 'CLIENT_SECRET_FILE')
-        ]) {
-            sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
-            unzip dir: '', glob: '', zipFile: 'master.zip'
-            withDockerContainer(args: '-u 0', image: 'python') {
-                sh "pip install --upgrade httplib2 oauth2client rsa uritemplate"
-                sh "pip install --upgrade google-api-python-client progressbar2"
-                sh "cd youtube-upload-master ; python setup.py install"
-                def params = []
-                params.add("--title=${title}")
-                params.add("--default-language=ja")
-                params.add("--default-audio-language=ja")                         
-                params.add("--credentials-file=${CREDENTIAL_FILE}")
-                params.add("--client-secrets=${CLIENT_SECRET_FILE}")
-                def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
-                videoId = sh( returnStdout: true, script: cmd).trim()
-            }
-        }        
-    }
+        sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
+        unzip dir: '', glob: '', zipFile: 'master.zip'
+        withDockerContainer(args: '-u 0', image: 'python') {
+            sh "pip install --upgrade httplib2 oauth2client rsa uritemplate"
+            sh "pip install --upgrade google-api-python-client progressbar2"
+            sh "cd youtube-upload-master ; python setup.py install"
+            def params = []
+            params.add("--title=${title}")
+            params.add("--default-language=ja")
+            params.add("--default-audio-language=ja")                         
+            params.add("--credentials-file=${CREDENTIAL_FILE}")
+            params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+            def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
+            videoId = sh( returnStdout: true, script: cmd).trim()
+        }
+    }  
     return videoId
 }
 
-def updateVideo(videoId,title,descriptionFile,categoryId,tag){
+def updateVideo(videoId,title,descriptionFile,categoryId,tag,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def result = ""
     withCredentials([
-        string(credentialsId: 'YOUTUBE_API_KEY', variable: 'YOUTUBE_API_KEY')
+        file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
+        file(credentialsId: secretFileId, variable: 'CLIENT_SECRET_FILE')
     ]) {
-        withCredentials([
-            file(credentialsId: 'youtube_upload_credential', variable: 'CREDENTIAL_FILE'),
-            file(credentialsId: 'youtube_upload_client_secret', variable: 'CLIENT_SECRET_FILE')
-        ]) {
-            script = libraryResource 'youtube/video_update.py'
-            writeFile file: "video_update.py",text: script
-            withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
-                sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
-                def params = []
-                params.add("--video-id=${videoId}")
-                params.add("--title=${title}")
-                params.add("--description-file=${descriptionFile}")
-                params.add("--category-id=${categoryId}")
-                params.add("--tag=${tag}")
-                params.add("--credentials-file=${CREDENTIAL_FILE}")
-                params.add("--client-secrets=${CLIENT_SECRET_FILE}")
-                def cmd = "python video_update.py "+ params.join(" ")
-                result = sh( returnStdout: true, script: cmd).trim()
-                echo result
-            }
-        }        
-    }
+        script = libraryResource 'youtube/video_update.py'
+        writeFile file: "video_update.py",text: script
+        withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
+            sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
+            def params = []
+            params.add("--video-id=${videoId}")
+            params.add("--title=${title}")
+            params.add("--description-file=${descriptionFile}")
+            params.add("--category-id=${categoryId}")
+            params.add("--tag=${tag}")
+            params.add("--credentials-file=${CREDENTIAL_FILE}")
+            params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+            def cmd = "python video_update.py "+ params.join(" ")
+            result = sh( returnStdout: true, script: cmd).trim()
+            echo result
+        }
+    }   
     return result
 }
