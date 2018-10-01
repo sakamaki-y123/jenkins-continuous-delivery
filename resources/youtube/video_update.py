@@ -88,7 +88,8 @@ def update_video(youtube, options):
   # list of tags associated with the video.
   if "tags" not in  videos_list_snippet:
     videos_list_snippet["tags"] = []
-  videos_list_snippet["tags"].append((options.tags or "").split(","))
+  for tag in (options.tags or "").split(","):
+    videos_list_snippet["tags"].append(tag)
 
   if options.category_id != "":
     videos_list_snippet["category_id"] = options.category_id
