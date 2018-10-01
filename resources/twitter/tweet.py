@@ -13,7 +13,8 @@ twitter = OAuth1Session(CK, CS, AT, ATS)
 def main(args):
     url = "https://api.twitter.com/1.1/statuses/update.json"
 
-    req = twitter.post(url, args.tweet)
+    params = {"status": args.tweet}
+    req = twitter.post(url, params = params)
 
     if req.status_code == 200:
         print("Succeed!")
