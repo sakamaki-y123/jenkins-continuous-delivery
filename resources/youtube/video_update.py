@@ -88,7 +88,7 @@ def update_video(youtube, options):
   # list of tags associated with the video.
   if "tags" not in  videos_list_snippet:
     videos_list_snippet["tags"] = []
-  videos_list_snippet["tags"].append(options.tag)
+  videos_list_snippet["tags"].append((options.tags or "").split(","))
 
   if options.category_id != "":
     videos_list_snippet["category_id"] = options.category_id
@@ -108,7 +108,7 @@ if __name__ == "__main__":
   argparser.add_argument("--description", default="", help="Video description")
   argparser.add_argument("--description-file", default="", help="Video description file")
   argparser.add_argument("--category-id", default="", help="Video category Id")
-  argparser.add_argument("--tag", default="youtube", help="Additional tag to add to video.")
+  argparser.add_argument("--tags", default="youtube", help="Additional tag to add to video.")
   argparser.add_argument("--client-secrets", default=".client_secrets.json", help="Client secrets JSON file")
   argparser.add_argument("--credentials-file", default=".youtube-upload-credentials.json", help="Credentials JSON file")
   args = argparser.parse_args()

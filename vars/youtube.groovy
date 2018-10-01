@@ -128,7 +128,7 @@ def uploadVideo(title,videoPath,credentialFileId = 'youtube_upload_credential',s
     return videoId
 }
 
-def updateVideo(videoId,title,descriptionFile,categoryId,tag,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
+def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def result = ""
     withCredentials([
         file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
@@ -143,7 +143,7 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tag,credentialFileId = 
             params.add("--title=${title}")
             params.add("--description-file=${descriptionFile}")
             params.add("--category-id=${categoryId}")
-            params.add("--tag=${tag}")
+            params.add("--tags=${tags}")
             params.add("--credentials-file=${CREDENTIAL_FILE}")
             params.add("--client-secrets=${CLIENT_SECRET_FILE}")
             def cmd = "python video_update.py "+ params.join(" ")
