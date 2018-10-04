@@ -27,6 +27,33 @@ def getBoketeUrl(category){
     }
 }
 
+def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber){
+    // get info
+    for (int page = startPageNumber; page < endPageNumber; page++) {
+        withEnv([
+            "URL=${boketeUrl}?page=${page}"
+        ]) {
+            def hotPageHtml = sh( returnStdout: true, script: 'curl --fail ${URL}')
+            for( line in hotPageHtml.split("\n")){
+                if(line.trim().startsWith('<input type="text" class="form-control" value=') && line.contains('<a href=')){
+                    def boketeInfo = line.trim().replaceFirst('<input type="text" class="form-control" value=','').replaceFirst('\'<a href="','').replaceFirst('"><img src="',' ').replaceFirst('" title="',' ').replaceFirst('"></a>\'','').split(' ')
+                    def bokete = [:]
+                    bokete.url = boketeInfo[0]
+                    bokete.downloadUrl = boketeInfo[1]
+                    bokete.title = boketeInfo[2]
+                    boketeInfoList << bokete
+                    if( boketeInfoList.size() >= MAX_RESULT.toInteger()){
+                        break;
+                    }                                    
+                }
+            }
+        }
+        if( boketeInfoList.size() >= MAX_RESULT.toInteger()){
+            break;
+        }   
+    }
+}
+
 
 def downloadBoketeImage(boketeInfoList,minresult,maxresult){
     def pickUpBoketeInfoList = []
