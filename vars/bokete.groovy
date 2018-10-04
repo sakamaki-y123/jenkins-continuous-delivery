@@ -28,6 +28,7 @@ def getBoketeUrl(category){
 }
 
 def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber){
+    def boketeInfoList = []
     // get info
     for (int page = startPageNumber; page < endPageNumber; page++) {
         withEnv([
