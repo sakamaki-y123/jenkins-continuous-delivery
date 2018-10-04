@@ -57,10 +57,10 @@ def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber,maxResult = "80"){
 }
 
 
-def downloadBoketeImage(boketeInfoList,minresult,maxresult){
+def downloadBoketeImage(category,boketeInfoList,minresult,maxresult){
     def pickUpBoketeInfoList = []
     int i = 1
-    dir("${CATEGORY}"){
+    dir(category){
         for (bokete in boketeInfoList) {
             if(minresult < i){
                 sh "curl --fail -o bokete_${i}.png ${bokete.downloadUrl}"
