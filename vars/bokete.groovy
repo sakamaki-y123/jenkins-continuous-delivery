@@ -27,7 +27,7 @@ def getBoketeUrl(category){
     }
 }
 
-def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber){
+def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber,maxResult = "80"){
     def boketeInfoList = []
     // get info
     for (int page = startPageNumber; page < endPageNumber; page++) {
@@ -43,13 +43,13 @@ def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber){
                     bokete.downloadUrl = boketeInfo[1]
                     bokete.title = boketeInfo[2]
                     boketeInfoList << bokete
-                    if( boketeInfoList.size() >= MAX_RESULT.toInteger()){
+                    if( boketeInfoList.size() >= maxResult){
                         break;
                     }                                    
                 }
             }
         }
-        if( boketeInfoList.size() >= MAX_RESULT.toInteger()){
+        if( boketeInfoList.size() >= maxResult){
             break;
         }   
     }
