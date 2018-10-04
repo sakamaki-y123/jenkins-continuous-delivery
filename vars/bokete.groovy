@@ -53,6 +53,7 @@ def getBoketeInfoList(boketeUrl,startPageNumber,endPageNumber){
             break;
         }   
     }
+    return boketeInfoList
 }
 
 
