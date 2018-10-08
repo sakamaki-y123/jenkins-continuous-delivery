@@ -1,4 +1,4 @@
-def translate(text){
+def translate(text,sourceLang = "ja", targetLang = "en"){
     if(text.isEmpty()){
         return text
     }
@@ -18,8 +18,8 @@ def translate(text){
         ]) {
             def jsonmap = [:]
             jsonmap.Text = "${text}"
-            jsonmap.SourceLanguageCode = "ja"
-            jsonmap.TargetLanguageCode = "en"
+            jsonmap.SourceLanguageCode = "${sourceLang}"
+            jsonmap.TargetLanguageCode = "${targetLang}"
             def translateData = readJSON text: groovy.json.JsonOutput.toJson(jsonmap)
             writeJSON file: 'translate.json', json: translateData
             sh 'aws translate translate-text --cli-input-json file://${WORKSPACE}/translate.json > translated.json'
