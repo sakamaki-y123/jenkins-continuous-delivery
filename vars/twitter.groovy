@@ -36,3 +36,16 @@ def tweetMedia(tweet,media, credentialFileId = 'twitter-config.py'){
         sh "python tweet_media.py -t '${tweet}' -f '${media}'"
     }
 }
+
+def tweetVideo(tweet,media, credentialFileId = 'twitter-config.py'){
+    withCredentials([
+        file(credentialsId: credentialFileId, variable: 'CONFIG_PY')
+    ]) {
+        sh "cp ${CONFIG_PY} ${WORKSPACE}/config.py"
+    }
+    withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
+        sh "pip install requests requests_oauthlib TwitterAPI"
+        writeFile file: 'tweet_video.py', text: libraryResource('twitter/tweet_video.py')
+        sh "python tweet_video.py -t '${tweet}' -f '${media}'"
+    }
+}
