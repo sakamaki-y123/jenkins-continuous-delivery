@@ -116,7 +116,7 @@ def uploadVideo(title,videoPath,credentialFileId = 'youtube_upload_credential',s
             sh "pip install --upgrade google-api-python-client progressbar2"
             sh "cd youtube-upload-master ; python setup.py install"
             def params = []
-            params.add("--title=${title}")
+            params.add("--title=\'${title}\'")
             params.add("--default-language=ja")
             params.add("--default-audio-language=ja")                         
             params.add("--credentials-file=${CREDENTIAL_FILE}")
