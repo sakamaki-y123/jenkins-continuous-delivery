@@ -103,6 +103,12 @@ def getSearchVideoInfoList(searchWords,publishedDaysAgo){
     return searchVideoInfoList
 }
 
+def getThumbnailsUrl(videoId,size = "standard"){
+    def videoInfo = getVideoInfo(videoId)
+    def thumbnailsUrl = videoInfo.items[0].thumbnails."${size}".url
+    return thumbnailsUrl
+}
+
 def uploadVideo(title,videoPath,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def videoId = ""
     withCredentials([
