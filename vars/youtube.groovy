@@ -140,7 +140,7 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
             def params = []
             params.add("--video-id=${videoId}")
-            params.add("--title=${title}")
+            params.add("--title=\'${title}\'")
             params.add("--description-file=${descriptionFile}")
             params.add("--category-id=${categoryId}")
             params.add("--tags=${tags}")
