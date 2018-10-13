@@ -105,7 +105,7 @@ def getSearchVideoInfoList(searchWords,publishedDaysAgo){
 
 def getThumbnailsUrl(videoId,size = "standard"){
     def videoInfo = getVideoInfo(videoId)
-    def thumbnailsUrl = videoInfo.items[0].thumbnails.["${size}"].url
+    def thumbnailsUrl = videoInfo.items[0].thumbnails["${size}"].url
     return thumbnailsUrl
 }
 
