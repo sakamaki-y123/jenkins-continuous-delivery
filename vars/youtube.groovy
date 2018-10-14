@@ -159,3 +159,26 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
     }   
     return result
 }
+
+def updateThumbnails(videoId,file,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
+    def result = ""
+    withCredentials([
+        file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
+        file(credentialsId: secretFileId, variable: 'CLIENT_SECRET_FILE')
+    ]) {
+        script = libraryResource 'youtube/thumbnails_update.py'
+        writeFile file: "thumbnails_update.py",text: script
+        withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
+            sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
+            def params = []
+            params.add("--video-id=${videoId}")
+            params.add("--file=${file}")
+            params.add("--credentials-file=${CREDENTIAL_FILE}")
+            params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+            def cmd = "python thumbnails_update.py "+ params.join(" ")
+            result = sh( returnStdout: true, script: cmd).trim()
+            echo result
+        }
+    }   
+    return result
+}
