@@ -163,8 +163,8 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
 def updateThumbnails(videoId,file,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def result = ""
     withCredentials([
-        file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
-        file(credentialsId: secretFileId, variable: 'CLIENT_SECRET_FILE')
+        file(credentialsId: "${credentialFileId}", variable: 'CREDENTIAL_FILE'),
+        file(credentialsId: "${secretFileId}", variable: 'CLIENT_SECRET_FILE')
     ]) {
         def script = libraryResource 'youtube/thumbnails_update.py'
         writeFile file: "thumbnails_update.py",text: script
