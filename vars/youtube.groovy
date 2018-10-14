@@ -140,7 +140,7 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
         file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
         file(credentialsId: secretFileId, variable: 'CLIENT_SECRET_FILE')
     ]) {
-        script = libraryResource 'youtube/video_update.py'
+        def script = libraryResource 'youtube/video_update.py'
         writeFile file: "video_update.py",text: script
         withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
@@ -162,13 +162,11 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
 
 def updateThumbnails(videoId,file,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def result = ""
-    echo credentialFileId
-    echo secretFileId
     withCredentials([
         file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
         file(credentialsId: secretFileId, variable: 'CLIENT_SECRET_FILE')
     ]) {
-        script = libraryResource 'youtube/thumbnails_update.py'
+        def script = libraryResource 'youtube/thumbnails_update.py'
         writeFile file: "thumbnails_update.py",text: script
         withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
