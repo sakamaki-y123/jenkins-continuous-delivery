@@ -160,7 +160,7 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
     return result
 }
 
-def updateThumbnails(videoId,file,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
+def updateThumbnails(videoId,file,String credentialFileId = 'youtube_upload_credential',String secretFileId = 'youtube_upload_client_secret'){
     def result = ""
     withCredentials([
         file(credentialsId: credentialFileId, variable: 'CREDENTIAL_FILE'),
