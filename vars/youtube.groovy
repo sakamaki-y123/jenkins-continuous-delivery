@@ -160,7 +160,7 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
     return result
 }
 
-def updateThumbnails(videoId,file,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
+def updateThumbnails(videoId,thumbnailsImage,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
     def result = ""
     withCredentials([
         file(credentialsId: "${credentialFileId}", variable: 'CREDENTIAL_FILE'),
@@ -172,7 +172,7 @@ def updateThumbnails(videoId,file,credentialFileId = 'youtube_upload_credential'
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
             def params = []
             params.add("--video-id=${videoId}")
-            params.add("--file=${file}")
+            params.add("--file=${thumbnailsImage}")
             params.add("--credentials-file=${CREDENTIAL_FILE}")
             params.add("--client-secrets=${CLIENT_SECRET_FILE}")
             def cmd = "python thumbnails_update.py "+ params.join(" ")
