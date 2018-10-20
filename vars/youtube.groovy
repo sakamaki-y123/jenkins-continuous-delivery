@@ -182,3 +182,28 @@ def updateThumbnails(videoId,thumbnailsImage,credentialFileId = 'youtube_upload_
     }   
     return result
 }
+
+
+def insertTopVideoComment(channelId,videoId,comment,credentialFileId = 'youtube_upload_credential',secretFileId = 'youtube_upload_client_secret'){
+    def result = ""
+    withCredentials([
+        file(credentialsId: "${credentialFileId}", variable: 'CREDENTIAL_FILE'),
+        file(credentialsId: "${secretFileId}", variable: 'CLIENT_SECRET_FILE')
+    ]) {
+        def script = libraryResource 'youtube/comment_threads.py'
+        writeFile file: "comment_threads.py",text: script
+        withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
+            sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
+            def params = []
+            params.add("--channelid=${channelId}")
+            params.add("--video-id=${videoId}")
+            params.add("--text=\'${comment}\'")
+            params.add("--credentials-file=${CREDENTIAL_FILE}")
+            params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+            def cmd = "python comment_threads.py "+ params.join(" ")
+            result = sh( returnStdout: true, script: cmd).trim()
+            echo result
+        }
+    }   
+    return result
+}
