@@ -21,6 +21,12 @@ def getBoketeUrl(category){
         case "sonota":
             return "https://bokete.jp/boke/category/%E3%81%9D%E3%81%AE%E4%BB%96/hot"
             break
+        case "select":
+            return "https://bokete.jp/boke/select"
+            break
+        case "pickup":
+            return "https://bokete.jp/boke/pickup"
+            break
         default:
             return "https://bokete.jp/boke/tag/${category}"
             break
