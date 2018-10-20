@@ -69,7 +69,12 @@ def downloadBoketeImage(category,boketeInfoList,minresult,maxresult){
     dir(category){
         for (bokete in boketeInfoList) {
             if(minresult < i){
-                sh "curl --fail -o bokete_${i}.png ${bokete.downloadUrl}"
+                try {
+                    sh "curl --fail -o bokete_${i}.png ${bokete.downloadUrl}"
+                } catch (Exception){
+                    downloadUrl = "${bokete.downloadUrl}".replaceFirst('https',"http")
+                    sh "curl --fail -o bokete_${i}.png ${downloadUrl}"
+                }
                 pickUpBoketeInfoList << bokete
             }
 
