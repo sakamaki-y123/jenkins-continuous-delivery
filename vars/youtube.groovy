@@ -192,6 +192,7 @@ def insertTopVideoComment(channelId,videoId,comment,credentialFileId = 'youtube_
     ]) {
         def script = libraryResource 'youtube/comment_threads.py'
         writeFile file: "comment_threads.py",text: script
+        sh "curl --fail -o youtube-v3-discoverydocument.json https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest"
         withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
             def params = []
