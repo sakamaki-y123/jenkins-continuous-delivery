@@ -53,7 +53,7 @@ https://developers.google.com/api-client-library/python/guide/aaa_client_secrets
 def get_authenticated_service(args):
   client_secrets = args.client_secrets or CLIENT_SECRETS_FILE
   flow = flow_from_clientsecrets(client_secrets,
-    scope=YOUTUBE_READ_WRITE_SCOPE,
+    scope=YOUTUBE_READ_WRITE_SSL_SCOPE,
     message=MISSING_CLIENT_SECRETS_MESSAGE)
 
   credentials = args.credentials_file or "%s-oauth2.json" % sys.argv[0]
