@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # Usage example:
-# python comment_threads.py --channelid='<channel_id>' --videoid='<video_id>' --text='<text>'
+# python comment_threads.py --channelid='<channel_id>' --video-id='<video_id>' --text='<text>'
 
 import httplib2
 import os
@@ -131,7 +131,7 @@ if __name__ == "__main__":
   argparser.add_argument("--channelid", help="Required; ID for channel for which the comment will be inserted.")
   # The "videoid" option specifies the YouTube video ID that uniquely
   # identifies the video for which the comment will be inserted.
-  argparser.add_argument("--videoid", help="Required; ID for video for which the comment will be inserted.")
+  argparser.add_argument("--video-id", help="Required; ID for video for which the comment will be inserted.")
   # The "text" option specifies the text that will be used as comment.
   argparser.add_argument("--text", help="Required; text that will be used as comment.")
   argparser.add_argument("--client-secrets", default=".client_secrets.json", help="Client secrets JSON file")
@@ -140,8 +140,8 @@ if __name__ == "__main__":
 
   if not args.channelid:
     exit("Please specify channelid using the --channelid= parameter.")
-  if not args.videoid:
-    exit("Please specify videoid using the --videoid= parameter.")
+  if not args.video_id:
+    exit("Please specify videoid using the --video-id= parameter.")
   if not args.text:
     exit("Please specify text using the --text= parameter.")
 
@@ -151,8 +151,8 @@ if __name__ == "__main__":
     # Insert channel comment by omitting videoId
     insert_comment(youtube, args.channelid, None, args.text)
     # Insert video comment
-    insert_comment(youtube, args.channelid, args.videoid, args.text)
-    video_comments = get_comments(youtube, args.videoid, None)
+    insert_comment(youtube, args.channelid, args.video_id, args.text)
+    video_comments = get_comments(youtube, args.video_id, None)
     if video_comments:
       update_comment(youtube, video_comments[0])
     channel_comments = get_comments(youtube, None, args.channelid)
