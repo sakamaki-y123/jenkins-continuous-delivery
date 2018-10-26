@@ -33,7 +33,7 @@ def getSecondsFromNow(targetDateTime){
     def current = new Date()
     def target = Date.parse("yyyy-MM-dd HH:mm:ss", "${targetDateTime}", TimeZone.getTimeZone("JST"))
     TimeDuration duration = TimeCategory.minus(target, current)
-    return (duration.days * 24 * 60 * 60 + duration.hours * 60 * 60 + duration.minutes * 60 + duration.seconds).toString()
+    return (duration.days * 24 * 60 * 60 + duration.hours * 60 * 60 + duration.minutes * 60 + duration.seconds)
 }
 
 return this
