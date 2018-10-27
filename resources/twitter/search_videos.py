@@ -44,7 +44,7 @@ def main(args):
     max_result = int(args.max_result)
     result_json = args.file
     video_infos = []
-    for status in tweepy.Cursor(api.search,q=keyword,count = search_count,result_type = search_result_type,lang=search_lang).items():
+    for status in tweepy.Cursor(api.search,q=keyword,count = search_count,result_type = search_result_type).items():
         video_infos = get_video_url(status, video_infos)
         if(max_result <= len(video_infos)):
             break;
@@ -59,7 +59,6 @@ if __name__ == '__main__':
     )
     parser.add_argument('-k', '--keyword', nargs='+', required=True)
     parser.add_argument('-f', '--file', required=False ,default="search_video_result.json")
-    parser.add_argument('-l', '--lang', required=False,default="en")
     parser.add_argument('-r', '--result-type', required=False, default="recent")
     parser.add_argument('-c', '--count', required=False, default="5000")
     parser.add_argument('-m', '--max-result', required=False, default="30")
