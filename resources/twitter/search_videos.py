@@ -22,19 +22,11 @@ api = tweepy.API(auth)
 def get_video_url(status,video_infos):
     if hasattr(status, 'extended_entities'):
         for media in status.extended_entities.get('media', [{}]):
-            if (media.get('type', None) == 'video') and (media['video_info']['variants'][0]['content_type'] == 'video/mp4') :
-
-                video_info ={}
-                video_info["id"] = status.id_str
-                video_info["user_id"] = status.user.name
-                video_info["user_name"] = status.user.screen_name
-                video_info["tweet_date"] = str(status.created_at + datetime.timedelta(hours=9))
-                video_info["tweet_message"] = status.text
-                video_info["video_url"] = media['video_info']['variants'][0]['url']
-                video_infos.append(video_info)
-                print("tweet id:" + video_info["id"])
-                print("video url:" + video_info["video_url"])
-    return video_infos
+            if media.get('type', None) == 'video' :
+                for variants in media['video_info']['variants']:
+                    if variants.get('bitrate', None) == 2176000 and variants['content_type'] == 'video/mp4':
+                        video_infos.append(variants['url'])
+    return set(video_infos)
 
 def main(args):
     keyword = args.keyword
