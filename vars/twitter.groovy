@@ -50,7 +50,7 @@ def tweetVideo(tweet,media, credentialFileId = 'twitter-config.py'){
     }
 }
 
-def searchVideo( keyword ,targetCount,credentialFileId = 'twitter-config.py'){
+def searchVideo( keyword,targetCount,isReSearch,credentialFileId = 'twitter-config.py'){
     withCredentials([
         file(credentialsId: credentialFileId, variable: 'CONFIG_PY')
     ]) {
@@ -66,7 +66,11 @@ def searchVideo( keyword ,targetCount,credentialFileId = 'twitter-config.py'){
             searchedUrls = readJSON file: "search_video.json"
             videoUrls << searchedUrls
             videoUrls.unique()
-            return ( targetCount <= videoUrls.size());
+            if(isReSearch){
+                return ( targetCount <= videoUrls.size());
+            } else {
+                return true
+            }            
         }
     }
     return videoUrls
