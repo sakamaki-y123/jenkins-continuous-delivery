@@ -25,7 +25,6 @@ def get_video_url(status,video_infos):
             if media.get('type', None) == 'video' :
                 for variants in media['video_info']['variants']:
                     if (variants.get('bitrate', None) == 2176000) and (variants['content_type'] == 'video/mp4'):
-                        print(media)
                         video_infos.append(variants['url'])
     return list(set(video_infos))
 
@@ -35,17 +34,17 @@ def main(args):
     search_count = int(args.count)
     max_result = int(args.max_result)
     result_json = args.file
-    video_infos = []
+    video_urls = []
     for status in tweepy.Cursor(api.search,q=keyword,result_type = search_result_type,count = search_count).items():
-        video_infos = get_video_url(status, video_infos)
-        if(max_result <= len(video_infos)):
+        video_urls = get_video_url(status, video_urls)
+        if(max_result <= len(video_urls)):
             break;
 
-    print('--- result ---')
-    print(video_infos)
+    for videourl in video_urls:
+        print(videourl)
 
     fw = open(result_json, 'w')
-    json.dump(video_infos, fw, indent=4)
+    json.dump(video_urls, fw, indent=4)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
