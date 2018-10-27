@@ -62,7 +62,7 @@ def searchVideo( keyword ,targetCount,credentialFileId = 'twitter-config.py'){
         writeFile file: 'search_videos.py', text: libraryResource('twitter/search_videos.py')
         int i = 1
         waitUntil {
-            sh "python search_videos.py -k '${keyword}' -f search_video.json -r recent -c ${searchCount}"
+            sh "python search_videos.py -k '${keyword}' -f search_video.json -r recent -c 5000"
             searchedUrls = readJSON file: "search_video.json"
             videoUrls << searchedUrls
             videoUrls.unique()
