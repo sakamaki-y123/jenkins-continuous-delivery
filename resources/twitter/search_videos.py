@@ -25,7 +25,6 @@ def get_video_url(status,video_infos):
             if (media.get('type', None) == 'video') and (media['video_info']['variants'][0]['content_type'] == 'video/mp4') :
                 video_info ={}
                 video_info["id"] = status.id_str
-                video_info["tweet_url"] = status.entities.urls
                 video_info["user_id"] = status.user.name
                 video_info["user_name"] = status.user.screen_name
                 video_info["tweet_date"] = str(status.created_at + datetime.timedelta(hours=9))
