@@ -59,7 +59,7 @@ if __name__ == '__main__':
     parser.add_argument('-k', '--keyword', nargs='+', required=True)
     parser.add_argument('-f', '--file', required=False ,default="search_video_result.json")
     parser.add_argument('-r', '--result-type', required=False, default="recent")
-    parser.add_argument('-c', '--count', required=False, default="5000")
+    parser.add_argument('-c', '--count', required=False, default="500")
     parser.add_argument('-m', '--max-result', required=False, default="30")
 
     args = parser.parse_args()
