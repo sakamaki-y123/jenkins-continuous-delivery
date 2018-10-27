@@ -23,6 +23,7 @@ def get_video_url(status,video_infos):
     if hasattr(status, 'extended_entities'):
         for media in status.extended_entities.get('media', [{}]):
             if (media.get('type', None) == 'video') and (media['video_info']['variants'][0]['content_type'] == 'video/mp4') :
+
                 video_info ={}
                 video_info["id"] = status.id_str
                 video_info["user_id"] = status.user.name
@@ -60,7 +61,7 @@ if __name__ == '__main__':
     parser.add_argument('-f', '--file', required=False ,default="search_video_result.json")
     parser.add_argument('-l', '--lang', required=False,default="en")
     parser.add_argument('-r', '--result-type', required=False, default="recent")
-    parser.add_argument('-c', '--count', required=False, default="500")
+    parser.add_argument('-c', '--count', required=False, default="5000")
     parser.add_argument('-m', '--max-result', required=False, default="30")
 
     args = parser.parse_args()
