@@ -64,7 +64,9 @@ def searchVideo( keyword,targetCount,isReSearch,credentialFileId = 'twitter-conf
         waitUntil {
             sh "python search_videos.py -k '${keyword}' -f search_video.json -r recent -c 5000"
             searchedUrls = readJSON file: "search_video.json"
-            videoUrls << searchedUrls
+            for (searchUrl in searchedUrls){
+                videoUrls << searchUrl
+            }
             videoUrls.unique()
             if(isReSearch){
                 return ( targetCount <= videoUrls.size());
