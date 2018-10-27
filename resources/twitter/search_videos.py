@@ -24,9 +24,10 @@ def get_video_url(status,video_infos):
         for media in status.extended_entities.get('media', [{}]):
             if media.get('type', None) == 'video' :
                 for variants in media['video_info']['variants']:
-                    if variants.get('bitrate', None) == 2176000 and variants['content_type'] == 'video/mp4':
+                    print(variants)
+                    if (variants.get('bitrate', None) == 2176000) and (variants['content_type'] == 'video/mp4'):
                         video_infos.append(variants['url'])
-    return set(video_infos)
+    return list(set(video_infos))
 
 def main(args):
     keyword = args.keyword
