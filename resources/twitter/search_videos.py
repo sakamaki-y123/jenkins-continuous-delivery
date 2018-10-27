@@ -38,7 +38,6 @@ def get_video_url(status,video_infos):
 
 def main(args):
     keyword = args.keyword
-    search_lang = args.lang
     search_result_type = args.result_type
     search_count = args.count
     max_result = int(args.max_result)
