@@ -2,75 +2,32 @@ pipeline {
 
     agent any
 
-    libraries {
-       lib("jenkins-continuous-delivery")
+    environment {
+        kittenImage = "kitten-image.jpg"
+        DROPBOX_SHARED_URL = "https://www.dropbox.com/sh/tpkdnsdha16feh1/AADAz-iqJTRj6lGMoSnzt4Qta"
     }
 
     stages {
-
-        stage ('get timeline'){
+        stage('get random kitten image') {
             steps {
-                script{
-                    withCredentials([
-                        file(credentialsId: 'twitter-config.py', variable: 'CONFIG_PY')
-                    ]) {
-                        sh "cp ${CONFIG_PY} ${WORKSPACE}/config.py"
-                    }
-		            withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
-		                sh "pip install requests requests_oauthlib"
-                        writeFile file: 'timeline.py', text: libraryResource('twitter/timeline.py')
-                        sh "python timeline.py -c 5"
-		            }
-                }
+                sh "curl --fail -o ${kittenImage} http://www.randomkittengenerator.com/cats/rotator.php"
             }
             post{
-                always{
-                    cleanWs()
+                success{
+                    archiveArtifacts "${kittenImage}"
+                    dropbox (
+                        configName: 'dropbox-test', 
+                        remoteDirectory: 'kitten', 
+                        sourceFiles: "${kittenImage}"
+                    )
+                    echo "Check here! ${DROPBOX_SHARED_URL}"
                 }
             }
         }
-        stage ('tweet'){
-            steps {
-                script{
-                    git 'https://github.com/sakamaki-y123/jenkins-continuous-delivery'
-		            withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
-		                sh "pip install requests requests_oauthlib"
-                        withCredentials([
-                            file(credentialsId: 'twitter-config.py', variable: 'CONFIG_PY')
-                        ]) {
-                            sh "cp ${CONFIG_PY} resources/twitter/config.py"
-                            sh "cd resources/twitter && python tweet.py -t '${TWEET}'"
-                        }   
-		            }
-                }
-            }
-            post{
-                always{
-                    cleanWs()
-                }
-            }
-        }
-        stage ('tweet media'){
-            steps {
-                script{
-                    git 'https://github.com/sakamaki-y123/jenkins-continuous-delivery'
-                    sh "cp kitten-image.jpg resources/twitter/kitten-image.jpg"
-                    withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
-		                sh "pip install requests requests_oauthlib"
-                        withCredentials([
-                            file(credentialsId: 'twitter-config.py', variable: 'CONFIG_PY')
-                        ]) {
-                            sh "cp ${CONFIG_PY} resources/twitter/config.py"
-                            sh "cd resources/twitter && python tweet_media.py -f kitten-image.jpg -t 'かわいいにゃんこ'"
-                        }   
-		            }
-                }
-            }
-            post{
-                always{
-                    cleanWs()
-                }
-            }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
