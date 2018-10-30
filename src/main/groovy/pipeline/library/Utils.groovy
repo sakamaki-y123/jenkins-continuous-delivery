@@ -36,4 +36,9 @@ def getSecondsFromNow(targetDateTime){
     return (duration.days * 24 * 60 * 60 + duration.hours * 60 * 60 + duration.minutes * 60 + duration.seconds)
 }
 
+def getTodaysDate(dateFormat = "yyyy-MM-dd"){
+    def today = new Date().format("${dateFormat}")
+    return today
+}
+
 return this
