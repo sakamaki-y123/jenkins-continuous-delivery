@@ -46,7 +46,9 @@ def tweetVideo(tweet,media, credentialFileId = 'twitter-config.py'){
     withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
         sh "pip install requests requests_oauthlib TwitterAPI"
         writeFile file: 'tweet_video.py', text: libraryResource('twitter/tweet_video.py')
-        sh "python tweet_video.py -t '${tweet}' -f '${media}'"
+        withEnv(["TWEET=${tweet}"]) {
+            sh "python tweet_video.py -t '$TWEET' -f '${media}'"
+        }
     }
 }
 
