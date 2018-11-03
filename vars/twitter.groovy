@@ -20,7 +20,9 @@ def tweet(tweet, credentialFileId = 'twitter-config.py'){
     withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
         sh "pip install requests requests_oauthlib"
         writeFile file: 'tweet.py', text: libraryResource('twitter/tweet.py')
-        sh "python tweet.py -t '${tweet}'"
+        withEnv(["TWEET=${tweet}"]) {
+            sh "python tweet.py -t '$TWEET'"
+        }
     }
 }
 
@@ -33,7 +35,9 @@ def tweetMedia(tweet,media, credentialFileId = 'twitter-config.py'){
     withDockerContainer(args: '-u 0', image: 'python:3.7-alpine3.7') {
         sh "pip install requests requests_oauthlib"
         writeFile file: 'tweet_media.py', text: libraryResource('twitter/tweet_media.py')
-        sh "python tweet_media.py -t '${tweet}' -f '${media}'"
+        withEnv(["TWEET=${tweet}"]) {
+            sh "python tweet_media.py -t '$TWEET' -f '${media}'"
+        }
     }
 }
 
