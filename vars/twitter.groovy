@@ -67,9 +67,7 @@ def searchVideo( keyword,targetCount,credentialFileId = 'twitter-config.py'){
         writeFile file: 'search_videos.py', text: libraryResource('twitter/search_videos.py')
         int i = 1
         waitUntil {
-            def outPutJsonPath = "search_video.json"
-            sh "python search_videos.py -k '${keyword}' -f ${outPutJsonPath} -m ${targetCount} -r recent -c 5000"
-            return outPutJsonPath      
+            sh "python search_videos.py -k '${keyword}' -f ${outPutJsonPath} -m ${targetCount} -r recent -c 5000"   
         }
     }
 }
