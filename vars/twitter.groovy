@@ -65,10 +65,7 @@ def searchVideo( keyword,targetCount,credentialFileId = 'twitter-config.py'){
     withDockerContainer(args: '-u 0', image: 'python:3.6.7-alpine3.6') {
         sh "pip install requests requests_oauthlib TwitterAPI tweepy"
         writeFile file: 'search_videos.py', text: libraryResource('twitter/search_videos.py')
-        int i = 1
-        waitUntil {
-            def outPutJsonPath = "search_video.json"
-            sh "python search_videos.py -k '${keyword}' -f ${outPutJsonPath} -m ${targetCount} -r recent -c 5000"   
-        }
+        def outPutJsonPath = "search_video.json"
+        sh "python search_videos.py -k '${keyword}' -f ${outPutJsonPath} -m ${targetCount} -r recent -c 5000"   
     }
 }
