@@ -56,30 +56,20 @@ def tweetVideo(tweet,media, credentialFileId = 'twitter-config.py'){
     }
 }
 
-def searchVideo( keyword,targetCount,isReSearch,credentialFileId = 'twitter-config.py'){
+def searchVideo( keyword,targetCount,credentialFileId = 'twitter-config.py'){
     withCredentials([
         file(credentialsId: credentialFileId, variable: 'CONFIG_PY')
     ]) {
         sh "cp ${CONFIG_PY} ${WORKSPACE}/config.py"
     }
-    videoUrls = []
     withDockerContainer(args: '-u 0', image: 'python:3.6.7-alpine3.6') {
         sh "pip install requests requests_oauthlib TwitterAPI tweepy"
         writeFile file: 'search_videos.py', text: libraryResource('twitter/search_videos.py')
         int i = 1
         waitUntil {
-            sh "python search_videos.py -k '${keyword}' -f search_video.json -m ${targetCount} -r recent -c 5000"
-            searchedUrls = readJSON file: "search_video.json"
-            for (searchUrl in searchedUrls){
-                videoUrls << searchUrl
-            }
-            videoUrls.unique()
-            if(isReSearch){
-                return ( targetCount <= videoUrls.size());
-            } else {
-                return true
-            }            
+            def outPutJsonPath = "search_video.json"
+            sh "python search_videos.py -k '${keyword}' -f ${outPutJsonPath} -m ${targetCount} -r recent -c 5000"
+            return outPutJsonPath      
         }
     }
-    return videoUrls
 }
