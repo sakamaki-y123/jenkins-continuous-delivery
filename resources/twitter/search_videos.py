@@ -6,6 +6,7 @@ import datetime
 import tweepy
 import config
 import json
+import codecs
 import sys
 import argparse
 
@@ -19,14 +20,22 @@ auth = tweepy.OAuthHandler(CONSUMER_TOKEN, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
 api = tweepy.API(auth)
 
-def get_video_url(status,video_infos):
-    if hasattr(status, 'extended_entities'):
+def get_video_infos(status,video_infos):
+    if hasattr(status, 'extended_entities') and not hasattr(status, 'retweeted_status'):
         for media in status.extended_entities.get('media', [{}]):
             if media.get('type', None) == 'video' :
                 for variants in media['video_info']['variants']:
                     if (variants.get('bitrate', None) == 2176000) and (variants['content_type'] == 'video/mp4'):
-                        video_infos.append(variants['url'])
-    return list(set(video_infos))
+                        video_info = {}
+                        video_info['tweet_id'] = media['id']
+                        video_info['tweet_url'] = media['url']
+                        video_info['tweet_text'] = status._json['text'].split(media['url'])[0]
+                        video_info['user_id'] = status.user._json['id']
+                        video_info['user_name'] = status.user._json['name']
+                        video_info['video_url'] = variants['url']
+                        video_info['created_at'] = status._json['created_at']
+                        video_infos.append(video_info)
+    return list(video_infos)
 
 def main(args):
     keyword = args.keyword
@@ -34,17 +43,18 @@ def main(args):
     search_count = int(args.count)
     max_result = int(args.max_result)
     result_json = args.file
-    video_urls = []
+    video_infos = []
     for status in tweepy.Cursor(api.search,q=keyword,result_type = search_result_type,count = search_count).items():
-        video_urls = get_video_url(status, video_urls)
-        if(max_result <= len(video_urls)):
+        video_infos = get_video_infos(status, video_infos)
+        if(max_result <= len(video_infos)):
             break;
 
-    for videourl in video_urls:
-        print(videourl)
+    for video_info in video_infos:
+        print(video_info['tweet_text'])
+        print(video_info['video_url'])
 
-    fw = open(result_json, 'w')
-    json.dump(video_urls, fw, indent=4)
+    fw = codecs.open(result_json, 'w', 'utf-8')
+    json.dump(video_infos, fw, ensure_ascii=False,indent=4)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
