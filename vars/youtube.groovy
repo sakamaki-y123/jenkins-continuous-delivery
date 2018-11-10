@@ -121,14 +121,16 @@ def uploadVideo(title,videoPath,credentialFileId = 'youtube_upload_credential',s
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate"
             sh "pip install --upgrade google-api-python-client progressbar2"
             sh "cd youtube-upload-master ; python setup.py install"
-            def params = []
-            params.add("--title=\'${title}\'")
-            params.add("--default-language=ja")
-            params.add("--default-audio-language=ja")                         
-            params.add("--credentials-file=${CREDENTIAL_FILE}")
-            params.add("--client-secrets=${CLIENT_SECRET_FILE}")
-            def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
-            videoId = sh( returnStdout: true, script: cmd).trim()
+            withEnv(["TITLE=${title}"]) {
+                def params = []
+                params.add("--title=\'${TITLE}\'")
+                params.add("--default-language=ja")
+                params.add("--default-audio-language=ja")
+                params.add("--credentials-file=${CREDENTIAL_FILE}")
+                params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+                def cmd = "youtube-upload "+ params.join(" ") + " ${videoPath}"
+                videoId = sh( returnStdout: true, script: cmd).trim()
+            }
         }
     }  
     return videoId
@@ -144,17 +146,19 @@ def updateVideo(videoId,title,descriptionFile,categoryId,tags,credentialFileId =
         writeFile file: "video_update.py",text: script
         withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
             sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
-            def params = []
-            params.add("--video-id=${videoId}")
-            params.add("--title=\'${title}\'")
-            params.add("--description-file=${descriptionFile}")
-            params.add("--category-id=${categoryId}")
-            params.add("--tags=${tags}")
-            params.add("--credentials-file=${CREDENTIAL_FILE}")
-            params.add("--client-secrets=${CLIENT_SECRET_FILE}")
-            def cmd = "python video_update.py "+ params.join(" ")
-            result = sh( returnStdout: true, script: cmd).trim()
-            echo result
+            withEnv(["TITLE=${title}"]) {
+                def params = []
+                params.add("--video-id=${videoId}")
+                params.add("--title=\'${TITLE}\'")
+                params.add("--description-file=${descriptionFile}")
+                params.add("--category-id=${categoryId}")
+                params.add("--tags=${tags}")
+                params.add("--credentials-file=${CREDENTIAL_FILE}")
+                params.add("--client-secrets=${CLIENT_SECRET_FILE}")
+                def cmd = "python video_update.py "+ params.join(" ")
+                result = sh( returnStdout: true, script: cmd).trim()
+                echo result
+            }
         }
     }   
     return result
