@@ -4,7 +4,6 @@ from datetime import datetime
 import hashlib
 import base64
 from xml.sax.saxutils import escape
-from chardet.universaldetector import UniversalDetector
 import random
 import codecs
 import sys
