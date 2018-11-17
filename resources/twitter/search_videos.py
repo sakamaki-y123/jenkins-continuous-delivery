@@ -18,7 +18,7 @@ ACCESS_SECRET = config.ACCESS_TOKEN_SECRET
 #apiを取得
 auth = tweepy.OAuthHandler(CONSUMER_TOKEN, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_TOKEN, ACCESS_SECRET)
-api = tweepy.API(auth)
+api = tweepy.API(auth,wait_on_rate_limit=True)
 
 def get_video_infos(status,video_infos):
     if hasattr(status, 'extended_entities') and not hasattr(status, 'retweeted_status'):
