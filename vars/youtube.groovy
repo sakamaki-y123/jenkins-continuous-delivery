@@ -117,9 +117,8 @@ def uploadVideo(title,videoPath,credentialFileId = 'youtube_upload_credential',s
     ]) {
         sh "wget https://github.com/tokland/youtube-upload/archive/master.zip"
         unzip dir: '', glob: '', zipFile: 'master.zip'
-        withDockerContainer(args: '-u 0', image: 'python') {
-            sh "pip install --upgrade httplib2 oauth2client rsa uritemplate"
-            sh "pip install --upgrade google-api-python-client progressbar2"
+        withDockerContainer(args: '-u 0', image: 'python:2.7-alpine3.6') {
+            sh "pip install --upgrade httplib2 oauth2client rsa uritemplate google-api-python-client progressbar2"
             sh "cd youtube-upload-master ; python setup.py install"
             withEnv(["TITLE=${title}"]) {
                 def params = []
