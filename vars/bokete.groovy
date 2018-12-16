@@ -87,6 +87,29 @@ def downloadBoketeImage(category,boketeInfoList,minresult,maxresult){
     return pickUpBoketeInfoList
 }
 
+def downloadBoketeImage(boketeInfoList,minresult,maxresult){
+    def pickUpBoketeInfoList = []
+    int i = 1
+    for (bokete in boketeInfoList) {
+        if(minresult < i){
+            bokete.image = "${bokete.downloadUrl}".split('/').last()
+            try {
+                sh "curl --fail -o ${bokete.image} ${bokete.downloadUrl}"
+            } catch (Exception){
+                downloadUrl = "${bokete.downloadUrl}".replaceFirst('https',"http")
+                sh "curl --fail -o ${bokete.image} ${downloadUrl}"
+            }
+            pickUpBoketeInfoList << bokete
+        }
+
+        if( maxresult <= i ){
+            break;
+        } 
+        i ++
+    } 
+    return pickUpBoketeInfoList
+}
+
 def createSourceDescription(boketeInfoList,minresult,maxresult){
     int i = 1
     // create source description
