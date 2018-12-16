@@ -128,3 +128,13 @@ def createSourceSummary(boketeInfoList,minresult,maxresult){
     }
     return sourceInfoList
 }
+
+def getBoketeComments( boketeUrl,resultJson = 'search_bokete_comments.json'){
+    withDockerContainer(args: '-u 0', image: 'python:3.6.7-alpine3.6') {
+        sh "pip install requests"
+        writeFile file: 'parse_bokete_comments.py', text: libraryResource('html-parser/parse_bokete_comments.py')
+        sh "python parse_bokete_comments.py -u '${boketeUrl}' -r '${resultJson}'"
+        def comments = readJSON file: "${resultJson}"
+        return comments
+    }
+}
