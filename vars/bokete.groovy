@@ -138,3 +138,18 @@ def getBoketeComments( boketeUrl,resultJson = 'search_bokete_comments.json'){
         return comments
     }
 }
+
+def addBoketeComments(boketeInfoList){
+    withDockerContainer(args: '-u 0', image: 'python:3.6.7-alpine3.6') {
+        sh "pip install requests"
+        writeFile file: 'parse_bokete_comments.py', text: libraryResource('html-parser/parse_bokete_comments.py')
+        for( boketeInfo in boketeInfoList){
+            retry(3){
+                sh "python parse_bokete_comments.py -u '${boketeInfo.url}' -r tmp_result.json"
+                def comments = readJSON file: "tmp_result.json"
+                boketeInfo.comments = comments
+            }
+        }
+        return boketeInfoList
+    }
+}
