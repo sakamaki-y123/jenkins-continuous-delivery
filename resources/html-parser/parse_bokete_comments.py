@@ -41,7 +41,7 @@ class Parser(HTMLParser):
             self.comment_data = {}
             self.comment_data['user'] = trimed_data
             return
-        if self.comment_text and trimed_data != '':
+        if self.comment_text and trimed_data != '' and trimed_data != 'もっと読み込む':
             self.comment_text = False
             self.comment_data['comment'] = trimed_data
             self.comment_data_list.append(self.comment_data)
