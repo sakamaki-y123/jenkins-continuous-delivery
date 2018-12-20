@@ -41,12 +41,16 @@ class Parser(HTMLParser):
             self.comment_data = {}
             self.comment_data['user'] = trimed_data
             return
-        if self.comment_text and trimed_data != '' and trimed_data != 'もっと読み込む' and not trimed_data.startswith('googletag'):
+        if self.comment_text and trimed_data == 'もっと読み込む' or trimed_data.startswith('googletag'):
+            self.comment_text = False
+            self.comment_content = False
+            self.comments = False
+            return
+        if self.comment_text and trimed_data != '':
             self.comment_text = False
             self.comment_data['comment'] = trimed_data
             self.comment_data_list.append(self.comment_data)
             return
-
 
 def parse_option():
     parser = argparse.ArgumentParser(
