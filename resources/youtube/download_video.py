@@ -18,7 +18,7 @@ def download(url,download_path):
     # もっとも解像度の高いものを取得
     # https://github.com/nficano/pytube#behold-a-perfect-balance-of-simplicity-versus-flexibility
     yt.streams.filter(progressive=True, file_extension='mp4').order_by('resolution').desc().first().download(output_path=download_path, filename=yt.video_id)
-    print(yt.video_id + "mp4")
+    print(yt.video_id + ".mp4")
 
 def parse_args():
     parser = argparse.ArgumentParser(
