@@ -1,0 +1,43 @@
+def getGroupId(groupName){
+    allGroups = readJSON file: 'groups.json'
+    for(group in allGroups){
+        if( group.value.name == groupName){
+            return group.key
+        }
+    }
+}
+
+def writeSummary(posts){
+    def summary = []
+    for( post in posts){
+        def tags = []
+        for(tag in post.value.tags){
+            tags << tag['key']
+        }
+        summary << "id   : ${post.key}"
+        summary << "title: ${post.value.title}"
+        summary << "tags : ${tags.join(',')}"
+        summary << "url  : ${post.value.url}"
+        summary << ""
+    }
+    writeFile file: 'summary.txt', text: summary.join("\n")
+}
+
+def getTag(post,groupName){
+    def tags = []
+    for(tag in post.value.tags){
+        tags << tag['key']
+    }
+    if( tags.isEmpty()){
+        tags << groupName
+    }
+    return tags.join(',')
+}
+
+def getTargetType(type){
+    if (type == 'fresh'){
+        return 'vote'
+    } else {
+        return type
+    }
+}
