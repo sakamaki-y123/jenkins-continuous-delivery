@@ -55,8 +55,8 @@ def downloadMedia(posts){
         if("${post.value.media_url}"){
             retry(3){
                 def download_media_name = getDownloadFileName(post)
-                sh "curl --fail -o ${download_video_name} ${post.value.media_url}"
-                post.value.video_name = download_video_name.toString()
+                sh "curl --fail -o ${download_media_name} ${post.value.media_url}"
+                post.value.video_name = download_media_name.toString()
             }
         }
     }
