@@ -41,3 +41,23 @@ def getTargetType(type){
         return type
     }
 }
+
+def getDownloadFileName(post){
+    if("${post.value.media_url}".endsWith(".mp4")){
+        return "${post.key}.mp4"
+    } else if ("${post.value.media_url}".endsWith(".jpg")){
+        return "${post.key}.jpg"
+    }
+}
+
+def downloadMedia(posts){
+    for( post in posts){
+        if("${post.value.media_url}"){
+            retry(3){
+                def download_media_name = getDownloadFileName(post)
+                sh "curl --fail -o ${download_video_name} ${post.value.media_url}"
+                post.value.video_name = download_video_name.toString()
+            }
+        }
+    }
+}
