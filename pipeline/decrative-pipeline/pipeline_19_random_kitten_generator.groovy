@@ -30,7 +30,7 @@ pipeline {
                         )]
                     ) {
                         slackSend(
-                            channel: '#kitten-generator',
+                            channel: '#jenkins_kitten_image',
                             color: 'good',
                             message: slackMessage.stripMargin(),
                             teamDomain: "${slackTeam}",
