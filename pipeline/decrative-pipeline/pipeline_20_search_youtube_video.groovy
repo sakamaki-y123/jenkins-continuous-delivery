@@ -101,7 +101,7 @@ pipeline {
                             """
                             echo message.stripMargin()
                             slackSend(
-                                channel: '#youtube_search',
+                                channel: '#jenkins_youtube_search',
                                 color: 'good',
                                 message: message.stripMargin(),
                                 teamDomain: "${slackTeam}",
